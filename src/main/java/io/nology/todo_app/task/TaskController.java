@@ -5,9 +5,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -18,9 +25,17 @@ public class TaskController {
   private TaskService taskService;
 
   @PostMapping
-  public String createTask(@Valid @RequestBody CreateTaskDTO data) {
-    return this.taskService.createTask(data);
+  public ResponseEntity<Task> createTask(@Valid @RequestBody CreateTaskDTO data) {
+    Task createdTask = this.taskService.createTask(data);
+    return new ResponseEntity<Task>(createdTask, HttpStatus.CREATED);
   }
+
+  @GetMapping
+  public ResponseEntity<List<Task>> findAllTasks() {
+    List<Task> tasks = this.taskService.findAll();
+    return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
+  }
+
 
   // getAllTodos
   // GET /todos?category={}

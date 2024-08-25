@@ -1,5 +1,7 @@
 package io.nology.todo_app.category;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,9 @@ public class CategoryService {
     Category newCategory = new Category();
     newCategory.setName(data.getName().trim());
     return this.repo.save(newCategory);
+  }
+
+  public List<Category> findAll() {
+    return this.repo.findAll();
   }
 }

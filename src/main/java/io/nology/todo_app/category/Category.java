@@ -23,7 +23,7 @@ public class Category {
   @Column
   private String name;
 
-  @OneToMany
+  @OneToMany(mappedBy = "category")
   @Column
   private List<Task> tasks;
 
