@@ -31,5 +31,4 @@ public class CategoryController {
     List<Category> categories = this.categoryService.findAll();
     return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
   }
-
 }
