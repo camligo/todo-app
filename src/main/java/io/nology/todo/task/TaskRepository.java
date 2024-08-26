@@ -1,4 +1,4 @@
-package io.nology.todo_app.task;
+package io.nology.todo.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

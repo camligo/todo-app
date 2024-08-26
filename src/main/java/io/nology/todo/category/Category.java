@@ -1,35 +1,29 @@
-package io.nology.todo_app.category;
+package io.nology.todo.category;
 
 import java.util.List;
 
-import io.nology.todo_app.task.Task;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.nology.todo.common.BaseEntity;
+import io.nology.todo.task.Task;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-public class Category {
+@Table(name = "categories")
+public class Category extends BaseEntity {
 
   public Category() {
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @Column
+  @Column(unique = true)
   private String name;
 
   @OneToMany(mappedBy = "category")
-  @Column
+  @JsonIgnoreProperties("category")
   private List<Task> tasks;
-
-  public Long getId() {
-    return id;
-  }
 
   public String getName() {
     return name;
@@ -37,10 +31,6 @@ public class Category {
 
   public List<Task> getTasks() {
     return tasks;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public void setName(String name) {

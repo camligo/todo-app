@@ -1,4 +1,4 @@
-package io.nology.todo_app.category;
+package io.nology.todo.category;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class CategoryController {
   private CategoryService categoryService;
 
   @PostMapping
-  public ResponseEntity<Category> createCategory(@Valid @RequestBody CreateCategoryDTO data) {
+  public ResponseEntity<Category> createCategory(@Valid @RequestBody CreateCategoryDTO data) throws Exception {
     Category createdCategory = this.categoryService.createCategory(data);
     return new ResponseEntity<Category>(createdCategory, HttpStatus.CREATED);
   }

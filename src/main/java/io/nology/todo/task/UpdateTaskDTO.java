@@ -1,13 +1,10 @@
-package io.nology.todo_app.task;
-
-import org.hibernate.validator.constraints.Length;
+package io.nology.todo.task;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class CreateTaskDTO {
+public class UpdateTaskDTO {
   @NotBlank
-  @Length(min = 3)
   private String name;
 
   @NotNull
@@ -17,7 +14,15 @@ public class CreateTaskDTO {
     return name;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public Long getCategoryId() {
     return categoryId;
+  }
+
+  public void setCategoryId(Long categoryId) {
+    this.categoryId = categoryId;
   }
 }

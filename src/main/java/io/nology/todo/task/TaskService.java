@@ -1,4 +1,4 @@
-package io.nology.todo_app.task;
+package io.nology.todo.task;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import io.nology.todo_app.category.Category;
-import io.nology.todo_app.category.CategoryRepository;
+import io.nology.todo.category.Category;
+import io.nology.todo.category.CategoryRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -38,21 +38,21 @@ public class TaskService {
     return this.repo.findById(id);
   }
 
-  // public Optional<Task> updateTaskById(Long id, @Valid UpdateTaskDTO data) {
-  //   Optional<Task> result = this.findTaskById(id);
-  //   if (result.isEmpty()) {
-  //     return result;
-  //   }
-  //   Task foundTask = result.get();
-  //   if (data.getName() != null) {
-  //     foundTask.setName(data.getName().trim());
-  //   }
-  //   if (data.getCategoryId() != null) {
-  //     foundTask.setCategoryId(data.getCategoryId());
-  //   }
-  //   Task updatedTask = this.repo.save(foundTask);
-  //   return Optional.of(updatedTask);
-  // }
+  public Optional<Task> updateTaskById(Long id, @Valid UpdateTaskDTO data) {
+    Optional<Task> result = this.findTaskById(id);
+    if (result.isEmpty()) {
+      return result;
+    }
+    Task foundTask = result.get();
+    if (data.getName() != null) {
+      foundTask.setName(data.getName().trim());
+    }
+    // if (data.getCategoryId() != null) {
+    //   foundTask.setCategoryId(data.getCategoryId());
+    // }
+    Task updatedTask = this.repo.save(foundTask);
+    return Optional.of(updatedTask);
+  }
 
   public boolean deleteTaskById(Long id) {
     Optional<Task> result = this.findTaskById(id);
@@ -62,5 +62,4 @@ public class TaskService {
     this.repo.delete(result.get());
     return true;
   }
-
 }

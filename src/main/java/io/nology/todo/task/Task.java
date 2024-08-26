@@ -1,25 +1,19 @@
-package io.nology.todo_app.task;
+package io.nology.todo.task;
 
-import io.nology.todo_app.category.Category;
+import io.nology.todo.category.Category;
+import io.nology.todo.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task extends BaseEntity {
 
   public Task() {
   }
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
 
   @Column
   private String name;
@@ -31,11 +25,6 @@ public class Task {
   @Column
   private boolean isArchived = false;
 
-
-  public Long getId() {
-    return id;
-  }
-
   public String getName() {
     return name;
   }
@@ -46,10 +35,6 @@ public class Task {
 
   public boolean isArchived() {
     return isArchived;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public void setName(String name) {

@@ -1,4 +1,4 @@
-package io.nology.todo_app.category;
+package io.nology.todo.category;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package io.nology.todo_app;
+package io.nology.todo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

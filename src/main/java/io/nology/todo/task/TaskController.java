@@ -1,9 +1,9 @@
-package io.nology.todo_app.task;
+package io.nology.todo.task;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.nology.todo_app.common.exceptions.NotFoundException;
+import io.nology.todo.common.exceptions.NotFoundException;
 import jakarta.validation.Valid;
 
 import java.util.List;
