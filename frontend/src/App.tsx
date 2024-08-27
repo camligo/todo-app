@@ -1,13 +1,17 @@
-import { useEffect } from "react"
-import { getAllTasks } from "./services/task-services"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import HomePage from "./pages/HomePage/HomePage"
 
 function App() {
-  useEffect(() => {
-    getAllTasks().then(console.log).catch(console.error)
-  }, [])
+
   return (
     <>
-      <h1>Todo App</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+
+        </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
