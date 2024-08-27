@@ -28,7 +28,7 @@ public class CategoryController {
 
   @GetMapping
   public ResponseEntity<List<Category>> findAllCategories() {
-    List<Category> categories = this.categoryService.findAll();
+    List<Category> categories = this.categoryService.findAllCategories();
     return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
   }
 }

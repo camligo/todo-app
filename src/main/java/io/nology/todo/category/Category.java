@@ -29,17 +29,15 @@ public class Category extends BaseEntity {
     return name;
   }
 
-  public List<Task> getTasks() {
-    return tasks;
-  }
-
   public void setName(String name) {
     this.name = name;
+  }
+
+  public List<Task> getTasks() {
+    return tasks;
   }
 
   public void setTasks(List<Task> tasks) {
     this.tasks = tasks;
   }
-
-
 }

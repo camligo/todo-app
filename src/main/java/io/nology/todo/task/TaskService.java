@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import io.nology.todo.category.Category;
-import io.nology.todo.category.CategoryRepository;
+import io.nology.todo.category.CategoryService;
 import jakarta.validation.Valid;
 
 @Service
@@ -18,10 +17,11 @@ public class TaskService {
   private TaskRepository repo;
 
   @Autowired
-  private CategoryRepository categoryRepo;
+  private CategoryService categoryService;
 
   public Task createTask(@Valid CreateTaskDTO data) {
-    Category category = categoryRepo.findById(data.getCategoryId())
+    // todo: handle exception
+    Category category = categoryService.findById(data.getCategoryId())
       .orElseThrow(() -> new RuntimeException("Category not found"));
 
     Task newTask = new Task();
@@ -30,7 +30,7 @@ public class TaskService {
     return this.repo.save(newTask);
   }
 
-  public List<Task> findAll() {
+  public List<Task> findAllTasks() {
     return this.repo.findAll();
   }
 
@@ -43,13 +43,20 @@ public class TaskService {
     if (result.isEmpty()) {
       return result;
     }
+
     Task foundTask = result.get();
+
     if (data.getName() != null) {
       foundTask.setName(data.getName().trim());
     }
-    // if (data.getCategoryId() != null) {
-    //   foundTask.setCategoryId(data.getCategoryId());
-    // }
+    if (data.getCategoryId() != null) {
+      Optional<Category> category = this.categoryService.findById(data.getCategoryId());
+      if (category.isEmpty()) {
+        System.out.println("Category " + id + "doesn't exist");
+      } else {
+        foundTask.setCategory(category.get());
+      }
+    }
     Task updatedTask = this.repo.save(foundTask);
     return Optional.of(updatedTask);
   }

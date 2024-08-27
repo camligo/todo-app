@@ -10,7 +10,7 @@ import io.nology.todo.common.exceptions.NotFoundException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
   @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
-    return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
+  public ResponseEntity<String> handleNotFoundException(NotFoundException exception) {
+    return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
   }
 }

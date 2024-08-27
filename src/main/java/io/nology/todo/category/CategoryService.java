@@ -1,6 +1,7 @@
 package io.nology.todo.category;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,11 @@ public class CategoryService {
     return this.repo.save(newCategory);
   }
 
-  public List<Category> findAll() {
+  public Optional<Category> findById(Long categoryId) {
+    return this.repo.findById(categoryId);
+  }
+
+  public List<Category> findAllCategories() {
     return this.repo.findAll();
   }
 }
