@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
-import { deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
+import { createTask, deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
 import Task from "../../components/Task/Task"
+import TaskForm from "../../components/TaskForm/TaskForm"
+import { TaskFormData } from "../../components/TaskForm/schema"
+import { useNavigate } from "react-router-dom"
 
 const HomePage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
@@ -24,14 +27,20 @@ const HomePage = () => {
       const updatedTasks = tasks.filter(task => task.id !== id);
       setTasks(updatedTasks);
     }
-
   }
+
+  const onSubmit = async (data: TaskFormData) => {
+    const navigate = useNavigate();
+    createTask(data).then(() => navigate('/'));
+  };
+
   return (
     <>
       <h1>Todo App</h1>
       {tasks.map((task) => (
         <Task task={task} onDelete={deleteTask} key={task.id}/>
       ))}
+      <TaskForm onSubmit={onSubmit}/>
     </>
   )
 }
