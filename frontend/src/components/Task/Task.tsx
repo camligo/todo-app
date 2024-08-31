@@ -1,8 +1,8 @@
 import { TaskResponse } from "../../services/task-services"
 
 interface TaskProps {
-  task: TaskResponse
-  onDelete: (id: number) => Promise<unknown>
+  task: TaskResponse;
+  onDelete: (id: number) => Promise<unknown>;
 }
 
 const Task = ({ task, onDelete }: TaskProps) => {

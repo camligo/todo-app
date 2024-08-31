@@ -1,37 +1,49 @@
 import { useForm } from "react-hook-form"
 import { schema, TaskFormData } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import classes from "./TaskFrom.module.scss"
+import classes from "./TaskForm.module.scss"
+
+type FormType = 'CREATE' | 'UPDATE';
 
 interface TaskFormProps {
-  onSubmit: (data: TaskFormData) => unknown
+  formType?: FormType;
+  onSubmit: (data: TaskFormData) => unknown;
 }
 
-const TaskForm = ({ onSubmit }: TaskFormProps) => {
+const TaskForm = ({
+  formType = 'CREATE',
+  onSubmit,
+}: TaskFormProps) => {
   const {
     reset,
     register,
     formState: {errors, isSubmitSuccessful},
-    handleSubmit} = useForm<TaskFormData>({resolver: zodResolver(schema)})
+    handleSubmit,
+  } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
 
-    isSubmitSuccessful && reset();
+  isSubmitSuccessful && reset;
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
 
-      <div className={classes.field}>
-        <label htmlFor="name">Task</label>
-        <input type="text" {...register('name')} />
-        {errors?.name && <small className={classes.errorText}>{errors.name.message}</small>}
-      </div>
+        <div className={classes.field}>
+          <label htmlFor="name">Task</label>
+          <input id="name" type="text" {...register('name')} />
+          {errors?.name && <small>{errors.name.message}</small>}
+        </div>
 
-      <div className={classes.field}>
-        <label htmlFor="categoryId">Category</label>
-        <input type="number" {...register('categoryId')} />
-        {errors?.categoryId && <small className={classes.errorText}>{errors.categoryId.message}</small>}
-      </div>
+        <div>
+          <label htmlFor="category">Category</label>
+          <input id="category" {...register('categoryId', { valueAsNumber: true })} />
 
-      <button>Add task</button>
-    </form>
+
+          {errors?.categoryId && <small>{errors.categoryId.message}</small>}
+        </div>
+
+        <button>{formType === 'CREATE' ? 'Create' : 'Update'} Task</button>
+      </form>
+    </>
   )
 }
 

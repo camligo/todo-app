@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import HomePage from "./pages/HomePage/HomePage"
+import TasksPage from "./pages/TasksPage/TasksPage"
+import CreateTaskPage from "./pages/CreateTaskPage/CreateTaskPage"
 
 function App() {
 
@@ -7,8 +8,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-
+          <Route path='/' element={<TasksPage />} />
+          <Route path="/todos/new" element={<CreateTaskPage />}/>
         </Routes>
       </BrowserRouter>
 
