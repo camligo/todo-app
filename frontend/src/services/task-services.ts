@@ -84,5 +84,14 @@ export const deleteTaskById = async (id: number) => {
 }
 
 export const archivateTaskById = async (id: number) => {
+  const response = await fetch(baseUrl + `todos/${id}/archive`, {
+    method: 'PATCH',
+  });
 
-}
+  if (!response.ok) {
+    throw new Error("Failed to archive task");
+  }
+
+  return true;
+};
+

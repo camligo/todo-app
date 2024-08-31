@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
+import { archivateTaskById, deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
 import Task from "../../components/Task/Task"
 import CreateCategoryPage from "../CreateCategoryPage/CreateCategoryPage"
 import Navbar from "../../components/Navbar/Navbar"
@@ -13,18 +13,33 @@ const TodosPage = () => {
       .catch((e) => console.log(e));
   }, [])
 
-  const deleteTask = async (id: number) => {
-    const confirmed = confirm("Are you sure you want to delete this task?");
+  // const deleteTask = async (id: number) => {
+  //   const confirmed = confirm("Are you sure you want to delete this task?");
+  //   if(!confirmed) {
+  //     return;
+  //   }
+  //   const isDeleted = await deleteTaskById(id).catch((e) => {
+  //     console.log(e);
+  //     return false;
+  //   });
+  //   if(isDeleted) {
+  //     const updatedTasks = tasks.filter(task => task.id !== id);
+  //     setTasks(updatedTasks);
+  //   }
+  // }
+
+  const archiveTask = async (id: number) => {
+    const confirmed = confirm("Move this task to the archive?");
     if(!confirmed) {
       return;
     }
-    const isDeleted = await deleteTaskById(id).catch((e) => {
+    const isArchived = await archivateTaskById(id).catch((e) => {
       console.log(e);
       return false;
     });
-    if(isDeleted) {
+    if(isArchived) {
       const updatedTasks = tasks.filter(task => task.id !== id);
-      setTasks(updatedTasks);
+      setTasks(updatedTasks)
     }
   }
 
@@ -34,7 +49,7 @@ const TodosPage = () => {
       <h1>Todo App</h1>
       <CreateCategoryPage />
       {tasks.map((task) => (
-        <Task task={task} onDelete={deleteTask} key={task.id}/>
+        <Task task={task} onArchive={archiveTask} key={task.id}/>
       ))}
     </>
   )

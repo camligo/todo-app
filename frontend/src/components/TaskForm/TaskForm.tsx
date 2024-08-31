@@ -28,7 +28,7 @@ const TaskForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        
+
         <div className={classes.field}>
           <label htmlFor="name">Task</label>
           <input id="name" type="text" {...register('name')} />
@@ -46,7 +46,6 @@ const TaskForm = ({
             }}
             error={errors?.categoryId?.message}
           />
-
         </div>
 
         <button>{formType === 'CREATE' ? 'Create' : 'Update'} Task</button>
