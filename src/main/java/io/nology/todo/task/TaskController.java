@@ -1,6 +1,7 @@
 package io.nology.todo.task;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.nology.todo.common.exceptions.NotFoundException;
@@ -33,9 +34,15 @@ public class TaskController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Task>> findAllTasks() {
+  public ResponseEntity<List<Task>> findAllTasks(@RequestParam(required = false) Long category, @RequestParam(required = false) Boolean isArchived) {
     List<Task> tasks = this.taskService.findAllTasks();
     return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
+  }
+
+  @GetMapping("/archive")
+  public ResponseEntity<List<Task>> findAllArchivedTasks() {
+    List<Task> archivedTasks = this.taskService.findAllArchivedTasks();
+    return new ResponseEntity<>(archivedTasks, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
@@ -52,11 +59,21 @@ public class TaskController {
     return new ResponseEntity<>(foundTask, HttpStatus.OK);
   }
 
+  @PatchMapping("/{id}/archive")
+  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id) throws NotFoundException {
+    UpdateTaskDTO archiveDTO = new UpdateTaskDTO();
+    archiveDTO.setIsArchived(true);
+
+    Optional<Task> result = this.taskService.updateTaskById(id, archiveDTO);
+    Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));
+    return new ResponseEntity<>(foundTask, HttpStatus.OK);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteTaskById(@PathVariable Long id) throws NotFoundException {
     boolean deletedTask = this.taskService.deleteTaskById(id);
     if (deletedTask == false) {
-      throw new NotFoundException("Couldn't find Todo-task with id " + id);
+      throw new NotFoundException("Could not find Todo-task with id " + id);
     }
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

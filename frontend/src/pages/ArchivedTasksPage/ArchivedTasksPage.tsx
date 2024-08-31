@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
-import { deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
-import Task from "../../components/Task/Task"
-import CreateCategoryPage from "../CreateCategoryPage/CreateCategoryPage"
+import { useEffect, useState } from "react";
+import { deleteTaskById, getAllArchivedTasks, TaskResponse } from "../../services/task-services";
+import ArchivedTask from "../../components/ArchivedTask/ArchivedTask";
 
-const TodosPage = () => {
+const ArchivedTasksPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
 
   useEffect(() => {
-    getAllTasks()
+    getAllArchivedTasks()
       .then(data => setTasks(data))
       .catch((e) => console.log(e));
   }, [])
@@ -29,13 +28,12 @@ const TodosPage = () => {
 
   return (
     <>
-      <h1>Todo App</h1>
-      <CreateCategoryPage />
+      <h2>Archived Tasks</h2>
       {tasks.map((task) => (
-        <Task task={task} onDelete={deleteTask} key={task.id}/>
+        <ArchivedTask task={task} key={task.id} onDelete={deleteTask}/>
       ))}
     </>
   )
 }
 
-export default TodosPage
+export default ArchivedTasksPage

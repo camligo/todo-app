@@ -34,6 +34,10 @@ public class TaskService {
     return this.repo.findAll();
   }
 
+  public List<Task> findAllArchivedTasks() {
+    return this.repo.findByIsArchived(true);
+  }
+
   public Optional<Task> findTaskById(Long id) {
     return this.repo.findById(id);
   }
@@ -51,12 +55,17 @@ public class TaskService {
     }
     if (data.getCategoryId() != null) {
       Optional<Category> category = this.categoryService.findById(data.getCategoryId());
-      if (category.isEmpty()) {
-        System.out.println("Category " + id + "doesn't exist");
-      } else {
+
+      if(category.isPresent()) {
         foundTask.setCategory(category.get());
+      } else {
+        System.out.println("Category " + data.getCategoryId() + "doesn't exist");
       }
     }
+    if (data.getIsArchived() != null) {
+      foundTask.setArchived(data.getIsArchived());
+    }
+
     Task updatedTask = this.repo.save(foundTask);
     return Optional.of(updatedTask);
   }

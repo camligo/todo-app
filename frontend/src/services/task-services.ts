@@ -39,6 +39,15 @@ export const getAllTasks = async () => {
   return await response.json() as TaskResponse[];
 }
 
+export const getAllArchivedTasks = async () => {
+  const response = await fetch(baseUrl + 'todos/archive');
+
+  if(!response.ok) {
+    throw new Error('Failed to fetch archived tasks');
+  }
+  return await response.json() as TaskResponse[];
+}
+
 export const getTaskById = async (id: number) => {
   const response = await fetch(baseUrl + `todos/${id}`);
 
@@ -72,4 +81,8 @@ export const deleteTaskById = async (id: number) => {
     throw new Error("Failed to delete task with id " + id);
   }
   return true;
+}
+
+export const archivateTaskById = async (id: number) => {
+
 }

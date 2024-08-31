@@ -28,4 +28,14 @@ public class UpdateTaskDTO {
   public void setCategoryId(Long categoryId) {
     this.categoryId = categoryId;
   }
+
+  private Boolean isArchived;
+
+  public Boolean getIsArchived() {
+      return isArchived;
+  }
+
+  public void setIsArchived(Boolean isArchived) {
+    this.isArchived = isArchived;
+  }
 }
