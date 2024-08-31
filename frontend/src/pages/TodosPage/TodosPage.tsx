@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-services"
 import Task from "../../components/Task/Task"
 import CreateCategoryPage from "../CreateCategoryPage/CreateCategoryPage"
+import Navbar from "../../components/Navbar/Navbar"
 
 const TodosPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
@@ -29,6 +30,7 @@ const TodosPage = () => {
 
   return (
     <>
+      <Navbar />
       <h1>Todo App</h1>
       <CreateCategoryPage />
       {tasks.map((task) => (
