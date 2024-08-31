@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { TaskResponse } from "../../services/task-services"
 
 interface TaskProps {
@@ -14,6 +15,14 @@ const Task = ({ task, onDelete }: TaskProps) => {
         onClick={() => onDelete(task.id)}>
           Delete
       </button>
+      <button>
+        Duplicate
+      </button>
+      <Link to={`todos/${task.id}/edit`}>
+        <button>
+        Edit
+        </button>
+      </Link>
     </div>
   )
 }

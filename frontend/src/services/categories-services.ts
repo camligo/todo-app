@@ -11,7 +11,7 @@ export interface CategoryResponse {
 }
 
 export const getAllCategories = async () => {
-  const response = await fetch(baseUrl + '/categories');
+  const response = await fetch(baseUrl + 'categories');
 
   if(!response.ok) {
     throw new Error("Failed to fetch categories")
@@ -21,7 +21,7 @@ export const getAllCategories = async () => {
 }
 
 export const createCategory = async ( data: { name: string }) => {
-  const response = await fetch(baseUrl + '/categories', {
+  const response = await fetch(baseUrl + 'categories', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -35,7 +35,7 @@ export const createCategory = async ( data: { name: string }) => {
 }
 
 export const deleteCategoryById = async (id: number) => {
-  const response = await fetch(baseUrl + `/categories/${id}`, {
+  const response = await fetch(baseUrl + `categories/${id}`, {
     method: 'DELETE',
   });
   if(!response.ok) {

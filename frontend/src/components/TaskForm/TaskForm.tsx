@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { schema, TaskFormData } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import classes from "./TaskForm.module.scss"
+import CategorySelect from "../CategorySelect/CategorySelect.tsx";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -17,6 +18,7 @@ const TaskForm = ({
   const {
     reset,
     register,
+    setValue,
     formState: {errors, isSubmitSuccessful},
     handleSubmit,
   } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
@@ -26,7 +28,7 @@ const TaskForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-
+        
         <div className={classes.field}>
           <label htmlFor="name">Task</label>
           <input id="name" type="text" {...register('name')} />
@@ -34,11 +36,17 @@ const TaskForm = ({
         </div>
 
         <div>
-          <label htmlFor="category">Category</label>
-          <input id="category" {...register('categoryId', { valueAsNumber: true })} />
+          <CategorySelect
+            value={null} // intial value
+            onChange={(value) => {
+              console.log("Category Selected: ", value);
+              if(value !== null) {
+                setValue('categoryId', value, { shouldValidate: true });
+              }
+            }}
+            error={errors?.categoryId?.message}
+          />
 
-
-          {errors?.categoryId && <small>{errors.categoryId.message}</small>}
         </div>
 
         <button>{formType === 'CREATE' ? 'Create' : 'Update'} Task</button>

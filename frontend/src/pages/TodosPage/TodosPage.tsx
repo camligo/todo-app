@@ -3,7 +3,7 @@ import { deleteTaskById, getAllTasks, TaskResponse } from "../../services/task-s
 import Task from "../../components/Task/Task"
 import CreateCategoryPage from "../CreateCategoryPage/CreateCategoryPage"
 
-const TasksPage = () => {
+const TodosPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
 
   useEffect(() => {
@@ -32,12 +32,12 @@ const TasksPage = () => {
   return (
     <>
       <h1>Todo App</h1>
+      <CreateCategoryPage />
       {tasks.map((task) => (
         <Task task={task} onDelete={deleteTask} key={task.id}/>
       ))}
-      <CreateCategoryPage />
     </>
   )
 }
 
-export default TasksPage
+export default TodosPage
