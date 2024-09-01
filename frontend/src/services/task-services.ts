@@ -36,7 +36,8 @@ export const getAllTasks = async () => {
   if(!response.ok) {
     throw new Error('Failed to fetch tasks');
   }
-  return await response.json() as TaskResponse[];
+  const tasks = await response.json() as TaskResponse[];
+  return tasks.filter(task => !task.archived);
 }
 
 export const getAllArchivedTasks = async () => {
@@ -83,15 +84,23 @@ export const deleteTaskById = async (id: number) => {
   return true;
 }
 
-export const archivateTaskById = async (id: number) => {
-  const response = await fetch(baseUrl + `todos/${id}/archive`, {
+export const toggleArchiveTaskById = async (id: number, archive: boolean) => {
+  const response = await fetch(baseUrl + `todos/${id}/archive?archive=${archive}`, {
     method: 'PATCH',
   });
 
   if (!response.ok) {
-    throw new Error("Failed to archive task");
+    throw new Error(`Failed to ${archive ? "archive " : "unarchive "} task`);
   }
-
   return true;
 };
 
+// export const unArchiveTaskById = async (id: number) => {
+//   const response = await fetch(baseUrl + `todos/${id}/archive`, {
+//     method: 'PATCH',
+//   });
+
+//   if(!response.ok) {
+//     throw new Error("Failed to move task to Todo-list")
+//   }
+//   return true;

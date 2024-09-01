@@ -34,7 +34,8 @@ public class TaskController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Task>> findAllTasks(@RequestParam(required = false) Long category, @RequestParam(required = false) Boolean isArchived) {
+  public ResponseEntity<List<Task>> findAllTasks(
+    @RequestParam(required = false) Long category, @RequestParam(required = false) Boolean isArchived) {
     List<Task> tasks = this.taskService.findAllTasks();
     return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
   }
@@ -60,9 +61,9 @@ public class TaskController {
   }
 
   @PatchMapping("/{id}/archive")
-  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id) throws NotFoundException {
+  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id, @RequestParam boolean archive) throws NotFoundException {
     UpdateTaskDTO archiveDTO = new UpdateTaskDTO();
-    archiveDTO.setIsArchived(true);
+    archiveDTO.setIsArchived(archive);
 
     Optional<Task> result = this.taskService.updateTaskById(id, archiveDTO);
     Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));

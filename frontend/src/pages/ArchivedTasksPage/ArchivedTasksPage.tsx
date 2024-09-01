@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteTaskById, getAllArchivedTasks, TaskResponse } from "../../services/task-services";
+import { deleteTaskById, getAllArchivedTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services";
 import ArchivedTask from "../../components/ArchivedTask/ArchivedTask";
 
 const ArchivedTasksPage = () => {
@@ -26,11 +26,26 @@ const ArchivedTasksPage = () => {
     }
   }
 
+  const unArchiveTask = async (id: number) => {
+    const confirmed = confirm("Move this task to Todo-list?");
+    if(!confirmed) {
+      return;
+    }
+    const isUnArchived = await toggleArchiveTaskById(id, false).catch((e) => {
+      console.log(e);
+      return false;
+    });
+    if(isUnArchived) {
+      const updatedTasks = tasks.filter(task => task.id !== id);
+      setTasks(updatedTasks);
+    }
+  }
+
   return (
     <>
       <h2>Archived Tasks</h2>
       {tasks.map((task) => (
-        <ArchivedTask task={task} key={task.id} onDelete={deleteTask}/>
+        <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
       ))}
     </>
   )
