@@ -1,0 +1,79 @@
+@use "../../styles/variables.scss" as v;
+
+.taskWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .taskContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 1rem;
+    border: 1px solid v.$primary;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+
+    .taskDetails {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.btnDone {
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  border: 2px lightgray solid;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background: lightgrey;
+  }
+}
+
+.btnMain {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: v.$primary;
+  color: v.$secondary;
+  border-radius: 8px;
+  padding: 8px 24px;
+  transition: transform 200ms, background 200ms;
+  font-family: "Work Sans", sans-serif;
+
+  &:hover{
+    // transform: translateY(-1px);
+  }
+}
+
+.btnSecondary {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: v.$primary;
+  border-radius: 8px;
+  // border: 2px solid v.$primary;
+  // padding: 8px 24px;
+  transition: transform 200ms, background 200ms;
+  font-family: "Work Sans", sans-serif;
+}
+
+.categoryTag {
+  font-family: "Work Sans", sans-serif;
+  color: blue;
+}
