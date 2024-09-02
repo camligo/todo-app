@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { CategoryResponse, getAllCategories } from "../../services/categories-services"
+import styles from "./CategorySelect.module.scss"
 
 interface CategorySelectProps {
   value: number | null;
@@ -24,14 +25,14 @@ const CategorySelect = ({ value, onChange, error }: CategorySelectProps) => {
 
   return (
     <div>
-      <label htmlFor="category">Category</label>
       <select
         name="category"
         id="category"
         value={value ?? ""}
         onChange={handleSelectChange}
+        className={styles.selectMenu}
       >
-        <option value="">Select</option>
+        <option value="">Select category</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}

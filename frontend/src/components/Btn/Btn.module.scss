@@ -12,15 +12,18 @@ button.primary, button.secondary {
   }
 
   &.primary {
-    font-family: "Work Sans", sans-serif;
-    margin-inline: 0.4rem;
+    font-family: v.$font-primary;
     background: v.$primary;
     color: v.$secondary;
   }
 
   &.secondary {
-    font-family: "Work Sans", sans-serif;
+    font-family: v.$font-primary;
     background: transparent;
     color: v.$primary;
+
+    &:hover {
+      background: v.$tertiary;
+    }
   }
 }

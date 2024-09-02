@@ -29,15 +29,18 @@ const TaskForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-
-        <div className={styles.field}>
+        <div>
           <input
             id="name"
             type="text" {...register('name')}
             placeholder="Enter task"
             className={styles.formInput}
           />
-          {errors?.name && <small>{errors.name.message}</small>}
+          {errors?.name &&
+            <small className={styles.errorText}>
+              {errors.name.message}
+            </small>
+          }
         </div>
 
         <div>
@@ -54,7 +57,6 @@ const TaskForm = ({
         </div>
         <Btn variant="primary" onClick={() => console.log("button clicked")}>
           {formType === 'CREATE' ? 'Create' : 'Update'} task
-
         </Btn>
       </form>
     </>

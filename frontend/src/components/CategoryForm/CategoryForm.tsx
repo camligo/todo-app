@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CategoryFormData, schema } from "./schema";
 import classes from "./CategoryForm.module.scss";
+import Btn from "../Btn/Btn";
 
 type FormType = 'CREATE';
 
@@ -24,17 +25,15 @@ const CategoryForm = ({
 
   return (
     <>
-      <h2>Add new category</h2>
+      <h2>Create new category</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={classes.formCreate}>
-          <input
-            type="text"
-            placeholder="Enter a name" {...register('name')}
-            className={classes.formInput}
-          />
-          {errors?.name && <small>{errors.name.message}</small>}
-        <button className={classes.btnMain}>Add</button>
-        </div>
+        <input
+          type="text"
+          placeholder="Enter a name" {...register('name')}
+          className={classes.formInput}
+        />
+        {errors?.name && <small>{errors.name.message}</small>}
+        <Btn variant="secondary">Add</Btn>
       </form>
     </>
   )

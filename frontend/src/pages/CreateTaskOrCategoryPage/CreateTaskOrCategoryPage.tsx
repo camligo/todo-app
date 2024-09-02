@@ -6,6 +6,7 @@ import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import { CategoryFormData } from "../../components/CategoryForm/schema";
 import { createCategory } from "../../services/categories-services";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import styles from "./CreateTaskOrCategoryPage.module.scss";
 
 const CreateTaskPage = () => {
   const navigate = useNavigate();
@@ -28,11 +29,13 @@ const CreateTaskPage = () => {
   return (
     <PageWrapper>
       <h1>Create new task</h1>
-      <div>
-        <TaskForm onSubmit={handleTaskSubmit} formType='CREATE' />
-      </div>
-      <div>
-        <CategoryForm onSubmit={handleCategorySubmit} formType='CREATE' />
+      <div className={styles.formContainer}>
+        <div>
+          <TaskForm onSubmit={handleTaskSubmit} formType='CREATE' />
+        </div>
+        <div>
+          <CategoryForm onSubmit={handleCategorySubmit} formType='CREATE' />
+        </div>
       </div>
     </PageWrapper>
   )

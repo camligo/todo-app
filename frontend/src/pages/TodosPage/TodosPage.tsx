@@ -15,10 +15,6 @@ const TodosPage = () => {
   }, [])
 
   const archiveTask = async (id: number) => {
-    const confirmed = confirm("Move this task to the archive?");
-    if(!confirmed) {
-      return;
-    }
     const isArchived = await toggleArchiveTaskById(id, true).catch((e) => {
       console.log(e);
       return false;

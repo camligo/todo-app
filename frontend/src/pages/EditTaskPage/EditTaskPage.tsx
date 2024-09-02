@@ -43,7 +43,7 @@ const EditTaskPage = () => {
       {status === 'SUCCESS' && task && (
         <TaskForm
           onSubmit={formSubmit}
-          formType="UPDATE"
+          formType='UPDATE'
         />
       )}
     </PageWrapper>

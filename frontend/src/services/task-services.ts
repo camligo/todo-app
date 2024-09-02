@@ -94,13 +94,3 @@ export const toggleArchiveTaskById = async (id: number, archive: boolean) => {
   }
   return true;
 };
-
-// export const unArchiveTaskById = async (id: number) => {
-//   const response = await fetch(baseUrl + `todos/${id}/archive`, {
-//     method: 'PATCH',
-//   });
-
-//   if(!response.ok) {
-//     throw new Error("Failed to move task to Todo-list")
-//   }
-//   return true;
