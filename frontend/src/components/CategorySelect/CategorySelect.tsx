@@ -28,11 +28,10 @@ const CategorySelect = ({ value, onChange, error }: CategorySelectProps) => {
       <select
         name="category"
         id="category"
-        value={value ?? ""}
         onChange={handleSelectChange}
         className={styles.selectMenu}
       >
-        <option value="">Select category</option>
+        <option value=""> Select category</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}

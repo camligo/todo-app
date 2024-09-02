@@ -24,7 +24,7 @@ const TaskForm = ({
     handleSubmit,
   } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
 
-  isSubmitSuccessful && reset;
+  isSubmitSuccessful && reset();
 
   return (
     <>

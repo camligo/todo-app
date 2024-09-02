@@ -60,7 +60,7 @@ export const getTaskById = async (id: number) => {
 }
 
 export const updateTaskById = async (id: number, data: TaskFormData) => {
-  const response = await fetch(baseUrl + `todos/${id}/edit`, {
+  const response = await fetch(baseUrl + `todos/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: {

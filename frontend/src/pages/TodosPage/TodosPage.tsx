@@ -28,12 +28,10 @@ const TodosPage = () => {
   return (
     <PageWrapper>
       <h1>To-do list</h1>
-      <div className={styles.contentWrapper}>
-        <div className={styles.tasksContainer}>
-          {tasks.map((task) => (
-            <Task task={task} onArchive={archiveTask} key={task.id}/>
-          ))}
-        </div>
+      <div className={styles.tasksContainer}>
+        {tasks.map((task) => (
+          <Task task={task} onArchive={archiveTask} key={task.id}/>
+        ))}
       </div>
     </PageWrapper>
   )
