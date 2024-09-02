@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services"
 import Task from "../../components/Task/Task"
 import styles from "./TodosPage.module.scss"
+import PageWrapper from "../../components/PageWrapper/PageWrapper"
 
 const TodosPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
@@ -29,17 +30,16 @@ const TodosPage = () => {
   }
 
   return (
-    <div className={styles.pageWrapper}>
-      <h1>Todo List</h1>
+    <PageWrapper>
+      <h1>To-do list</h1>
       <div className={styles.contentWrapper}>
         <div className={styles.tasksContainer}>
-          <h2>Tasks</h2>
           {tasks.map((task) => (
             <Task task={task} onArchive={archiveTask} key={task.id}/>
           ))}
         </div>
       </div>
-    </div>
+    </PageWrapper>
   )
 }
 

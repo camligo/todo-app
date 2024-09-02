@@ -3,6 +3,7 @@ import { getTaskById, TaskResponse, updateTaskById } from "../../services/task-s
 import { useNavigate, useParams } from "react-router-dom";
 import { TaskFormData } from "../../components/TaskForm/schema";
 import TaskForm from "../../components/TaskForm/TaskForm";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 type Status = 'IDLE' | 'LOADING' | 'SUCCESS' | 'FAILURE';
 
@@ -33,7 +34,7 @@ const EditTaskPage = () => {
       .catch(() => alert('Failed to update task'));
   };
   return (
-    <>
+    <PageWrapper>
       <h1>Edit Task</h1>
       {status === 'LOADING' && <p>Loading...</p>}
       {status === 'FAILURE' && (
@@ -45,7 +46,7 @@ const EditTaskPage = () => {
           formType="UPDATE"
         />
       )}
-    </>
+    </PageWrapper>
   )
 }
 
