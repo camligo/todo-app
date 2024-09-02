@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteTaskById, getAllArchivedTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services";
 import ArchivedTask from "../../components/ArchivedTask/ArchivedTask";
+import styles from "./ArchivedTasksPage.module.scss"
 
 const ArchivedTasksPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
@@ -43,10 +44,12 @@ const ArchivedTasksPage = () => {
 
   return (
     <>
-      <h2>Archived Tasks</h2>
-      {tasks.map((task) => (
-        <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
-      ))}
+      <section className={styles.pageWrapper}>
+        <h2>Completed tasks</h2>
+        {tasks.map((task) => (
+          <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
+        ))}
+      </section>
     </>
   )
 }

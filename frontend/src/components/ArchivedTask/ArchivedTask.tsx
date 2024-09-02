@@ -1,4 +1,6 @@
 import { TaskResponse } from "../../services/task-services"
+import Btn from "../Btn/Btn";
+import styles from "./ArchivedTask.module.scss"
 
 interface TaskProps {
   task: TaskResponse;
@@ -8,16 +10,23 @@ interface TaskProps {
 
 const ArchivedTask = ({ task, onDelete, onUnArchive }: TaskProps) => {
   return (
-    <div>
-      <h2>To do: {task.name}</h2>
-      <h2>Category: {task.category.name}</h2>
-      <button onClick={() => onDelete(task.id)}>
-          Delete
-      </button>
-      <button onClick={() => onUnArchive(task.id)}>
-        Unarchive
-      </button>
-    </div>
+    <article className={styles.taskContainer}>
+      <div className={styles.taskDetails}>
+        <h4>{task.name}</h4>
+        <p className={styles.categoryTag}>
+          {task.category.name}
+        </p>
+      </div>
+      <Btn onClick={() => onDelete(task.id)}>
+        Delete
+      </Btn>
+      <Btn
+        variant="secondary"
+        onClick={() => onUnArchive(task.id)}
+      >
+        Move to Todo
+      </Btn>
+    </article>
   )
 }
 

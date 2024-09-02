@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { TaskResponse } from "../../services/task-services"
 import styles from "./Task.module.scss"
+import Btn from "../Btn/Btn";
 
 interface TaskProps {
   task: TaskResponse;
@@ -10,7 +11,7 @@ interface TaskProps {
 const Task = ({ task, onArchive }: TaskProps) => {
   return (
     <div className={styles.taskWrapper}>
-      <div className={styles.taskContainer}>
+      <article className={styles.taskContainer}>
         <button
           onClick={() => onArchive(task.id)}
           className={styles.btnDone}>
@@ -21,14 +22,13 @@ const Task = ({ task, onArchive }: TaskProps) => {
           <p className={styles.categoryTag}>{task.category.name}</p>
         </div>
 
-        <Link to={`todos/${task.id}/edit`} className={styles.btnMain}>
-            Edit
+        <Link to={`todos/${task.id}/edit`}>
+            <Btn>Edit</Btn>
         </Link>
-      </div>
-
-      <button className={styles.btnSecondary}>
-        Duplicate
-      </button>
+        <Btn variant="secondary">
+          Duplicate
+        </Btn>
+      </article>
     </div>
   )
 }

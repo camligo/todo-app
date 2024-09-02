@@ -1,14 +1,28 @@
+@use "../../styles/variables.scss" as v;
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 1em;
   padding: 0.25em;
-}
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+    .formInput {
+      margin-bottom: 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid v.$text;
+      padding: 10px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 
 .errorText {

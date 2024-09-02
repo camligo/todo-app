@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form"
 import { schema, TaskFormData } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import classes from "./TaskForm.module.scss"
+import styles from "./TaskForm.module.scss"
 import CategorySelect from "../CategorySelect/CategorySelect.tsx";
+import Btn from "../Btn/Btn.tsx";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -27,11 +28,15 @@ const TaskForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 
-        <div className={classes.field}>
-          <label htmlFor="name">Task</label>
-          <input id="name" type="text" {...register('name')} />
+        <div className={styles.field}>
+          <input
+            id="name"
+            type="text" {...register('name')}
+            placeholder="Enter task"
+            className={styles.formInput}
+          />
           {errors?.name && <small>{errors.name.message}</small>}
         </div>
 
@@ -47,8 +52,10 @@ const TaskForm = ({
             error={errors?.categoryId?.message}
           />
         </div>
+        <Btn variant="primary" onClick={() => console.log("button clicked")}>
+          {formType === 'CREATE' ? 'Create' : 'Update'} task
 
-        <button>{formType === 'CREATE' ? 'Create' : 'Update'} Task</button>
+        </Btn>
       </form>
     </>
   )
