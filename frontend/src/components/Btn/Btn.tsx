@@ -1,12 +1,12 @@
 import styles from "./Btn.module.scss";
 
-interface Props {
+interface BtnProps {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: 'primary' | 'secondary';
 }
 
-const Btn: React.FC<Props> = ({ children, onClick, variant = 'primary' }) => {
+const Btn: React.FC<BtnProps> = ({ children, onClick, variant = 'primary' }) => {
   const btnClass = variant === 'primary' ? styles.primary : styles.secondary;
 
   return (

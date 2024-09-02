@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { CategoryFormData, schema } from "./schema";
 import classes from "./CategoryForm.module.scss";
 
-type FormType = 'CREATE' | 'UPDATE';
+type FormType = 'CREATE';
 
 interface CategoryFormProps {
   formType?: FormType;
@@ -24,12 +24,12 @@ const CategoryForm = ({
 
   return (
     <>
-      <h2>Add a new category</h2>
+      <h2>Add new category</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.formCreate}>
           <input
             type="text"
-            placeholder=" Enter new category" {...register('name')}
+            placeholder="Enter a name" {...register('name')}
             className={classes.formInput}
           />
           {errors?.name && <small>{errors.name.message}</small>}

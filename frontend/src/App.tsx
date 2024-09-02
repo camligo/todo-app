@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import CreateTaskPage from "./pages/CreateTaskPage/CreateTaskPage"
+import CreateTaskPage from "./pages/CreateTaskOrCategoryPage/CreateTaskOrCategoryPage"
 import TodosPage from "./pages/TodosPage/TodosPage"
 import EditTaskPage from "./pages/EditTaskPage/EditTaskPage"
 import ArchivedTasksPage from "./pages/ArchivedTasksPage/ArchivedTasksPage"

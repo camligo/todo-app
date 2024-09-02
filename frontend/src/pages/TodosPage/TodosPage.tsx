@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services"
 import Task from "../../components/Task/Task"
-import CreateCategoryPage from "../CreateCategoryPage/CreateCategoryPage"
 import styles from "./TodosPage.module.scss"
 
 const TodosPage = () => {
@@ -33,8 +32,6 @@ const TodosPage = () => {
     <div className={styles.pageWrapper}>
       <h1>Todo List</h1>
       <div className={styles.contentWrapper}>
-        <CreateCategoryPage />
-
         <div className={styles.tasksContainer}>
           <h2>Tasks</h2>
           {tasks.map((task) => (

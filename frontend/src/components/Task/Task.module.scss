@@ -27,22 +27,22 @@
       text-decoration: none;
     }
   }
-}
 
-.btnDone {
-  border-radius: 50%;
-  height: 16px;
-  width: 16px;
-  border: 2px lightgray solid;
-  background: transparent;
-  cursor: pointer;
+  .btnDone {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    border: 2px lightgray solid;
+    background: transparent;
+    cursor: pointer;
 
-  &:hover {
-    background: lightgrey;
+    &:hover {
+      background: lightgrey;
+    }
   }
-}
 
-.categoryTag {
-  font-family: "Work Sans", sans-serif;
-  color: blue;
+  .categoryTag {
+    font-family: "Work Sans", sans-serif;
+    color: blue;
+  }
 }
