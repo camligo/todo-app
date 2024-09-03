@@ -25,9 +25,18 @@ public class TaskService {
       .orElseThrow(() -> new RuntimeException("Category not found"));
 
     Task newTask = new Task();
-    newTask.setName(data.getName().trim());
+    String formattedName = formatName(data.getName());
+    newTask.setName(formattedName);
     newTask.setCategory(category);
     return this.repo.save(newTask);
+  }
+
+  private String formatName(String name) {
+    if (name.isEmpty()) {
+      return name;
+    }
+    name = name.trim().toLowerCase();
+    return name.substring(0, 1).toUpperCase() + name.substring(1);
   }
 
   public List<Task> findAllTasks() {

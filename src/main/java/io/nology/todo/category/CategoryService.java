@@ -16,8 +16,17 @@ public class CategoryService {
 
   public Category createCategory(@Valid CreateCategoryDTO data) {
     Category newCategory = new Category();
-    newCategory.setName(data.getName().trim());
+    String formattedName = formatName(data.getName());
+    newCategory.setName(formattedName);
     return this.repo.save(newCategory);
+  }
+
+  private String formatName(String name) {
+    if (name.isEmpty()) {
+      return name;
+    }
+    name = name.trim().toLowerCase();
+    return name.substring(0, 1).toUpperCase() + name.substring(1);
   }
 
   public Optional<Category> findById(Long categoryId) {
