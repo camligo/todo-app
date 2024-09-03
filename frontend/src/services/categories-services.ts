@@ -13,7 +13,7 @@ export interface CategoryResponse {
 export const getAllCategories = async () => {
   const response = await fetch(baseUrl + 'categories');
 
-  if(!response.ok) {
+  if (!response.ok) {
     throw new Error("Failed to fetch categories")
   }
 
@@ -28,10 +28,11 @@ export const createCategory = async ( data: { name: string }) => {
       'Content-Type': 'application/json'
     },
   });
-  if(!response.ok) {
-    throw new Error("Failed to create category");
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
   }
-  return (await response.json()) as CategoryResponse;
+  return await response.json() as CategoryResponse;
 }
 
 export const deleteCategoryById = async (id: number) => {

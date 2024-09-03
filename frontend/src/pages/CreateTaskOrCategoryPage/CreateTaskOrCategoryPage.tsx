@@ -14,15 +14,15 @@ const CreateTaskPage = () => {
   const handleTaskSubmit = async (data: TaskFormData) => {
     createTask(data)
     .then(() => navigate('/'))
-    .catch((e) => console.log(e)); // todo - display error on page
+    .catch((e) => console.log(e)); // todo - display error to user
   };
 
   const handleCategorySubmit = async (data: CategoryFormData) => {
     try {
-      createCategory(data)
-      // .then(() => navigate('/'))
-    } catch (e) {
-      console.log(e);
+      const newCategory = await createCategory(data);
+      return newCategory;
+    } catch (e: any) {
+      throw new Error(e.message)
     }
   };
 
