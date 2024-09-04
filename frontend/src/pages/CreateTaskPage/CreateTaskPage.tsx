@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { TaskFormData } from "../../components/TaskForm/schema";
 import { createTask } from "../../services/task-services";
 import TaskForm from "../../components/TaskForm/TaskForm";
-import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import { CategoryFormData } from "../../components/CategoryForm/schema";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import styles from "./CreateTaskOrCategoryPage.module.scss";
+import styles from "./CreateTaskPage.module.scss";
+import Title from "../../components/Title/Title";
 
 const CreateTaskPage = () => {
   const navigate = useNavigate();
@@ -16,25 +16,23 @@ const CreateTaskPage = () => {
     .catch((e) => console.log(e)); // todo - display error to user
   };
 
-  const handleCategorySubmit = async (data: CategoryFormData) => {
-    try {
-      const newCategory = await data;
-      return newCategory;
-    } catch (e: any) {
-      throw new Error(e.message)
-    }
-  };
+  // const handleCategorySubmit = async (data: CategoryFormData) => {
+  //   try {
+  //     const newCategory = await data;
+  //     return newCategory;
+  //   } catch (e: any) {
+  //     throw new Error(e.message)
+  //   }
+  // };
 
   return (
     <PageWrapper>
-      <h1>Create new task</h1>
+      <Title>Add new task</Title>
       <div className={styles.formContainer}>
-        <div>
           <TaskForm onSubmit={handleTaskSubmit} formType='CREATE' />
-        </div>
-        <div>
+        {/* <div>
           <CategoryForm onSubmit={handleCategorySubmit} formType='CREATE' />
-        </div>
+        </div> */}
       </div>
     </PageWrapper>
   )

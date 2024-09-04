@@ -1,11 +1,18 @@
 @use "../../styles/variables.scss" as v;
 
+label {
+  font-family: v.$fontPrimary;
+}
+
 .selectMenu {
-  font-family: v.$font-primary;
+  font-family: v.$fontPrimary;
+  color: rgba(0, 0, 0, 0.591);
   margin-block: 10px;
   width: 100%;
-  padding: 0.2rem;
+  padding: 0.4rem;
   border: 1px solid lightgray;
   height: 34px;
   appearance: none;
+  border-radius: 8px;
+  font-size: v.$xxs;
 }

@@ -1,0 +1,23 @@
+@use "../../styles/mixins.scss" as m;
+@use "../../styles/variables.scss" as v;
+
+.title {
+  font-family: v.$fontPrimary;
+  color: v.$text;
+
+  @include m.phone {
+    font-size: v.$lg;
+  }
+
+  @include m.phone {
+    font-size: v.$lg;
+  }
+
+  @include m.laptop {
+    font-size: v.$xl;
+  }
+
+  @include m.desktop {
+    font-size: v.$xxl;
+  }
+}

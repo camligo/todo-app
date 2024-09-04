@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "./TaskForm.module.scss"
 import CategorySelect from "../CategorySelect/CategorySelect.tsx";
 import Btn from "../Btn/Btn.tsx";
+import { FaCalendarDay } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -29,7 +31,8 @@ const TaskForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div>
+        <div className={styles.field}>
+          <label htmlFor="name">Task</label>
           <input
             id="name"
             type="text" {...register('name')}
@@ -43,7 +46,11 @@ const TaskForm = ({
           }
         </div>
 
-        <div>
+        <div className={styles.field}>
+          <div className={styles.flexRow}>
+            <label htmlFor="category">Category</label>
+            <Link to={"/categories"}>Create new category</Link>
+          </div>
           <CategorySelect
             value={null} // intial value
             onChange={(value) => {
@@ -55,8 +62,21 @@ const TaskForm = ({
             error={errors?.categoryId?.message}
           />
         </div>
+
+        <div className={styles.flexRow}>
+          <div className={styles.checkbox}>
+            <input type="checkbox" id="priority" name="priority"/>
+            <label htmlFor="priority">
+              <small>Priority</small>
+            </label>
+          </div>
+          <div className={styles.icon}>
+            <FaCalendarDay />
+          </div>
+        </div>
+
         <Btn variant="primary" onClick={() => console.log("button clicked")}>
-          {formType === 'CREATE' ? 'Create' : 'Update'} task
+          {formType === 'CREATE' ? 'Create' : 'Update'}
         </Btn>
       </form>
     </>

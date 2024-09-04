@@ -16,6 +16,7 @@ public class Task extends BaseEntity {
 
   public Task() {
     isArchived = false;
+    isPriority = false;
   }
 
   @Column
@@ -28,6 +29,9 @@ public class Task extends BaseEntity {
 
   @Column
   private boolean isArchived;
+
+  @Column
+  private boolean isPriority;
 
   public String getName() {
     return name;
@@ -51,5 +55,13 @@ public class Task extends BaseEntity {
 
   public void setArchived(boolean isArchived) {
     this.isArchived = isArchived;
+  }
+
+  public boolean isPriority() {
+    return isPriority;
+  }
+
+  public void setPriority(boolean isPriority) {
+    this.isPriority = isPriority;
   }
 }

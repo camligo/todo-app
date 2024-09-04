@@ -8,9 +8,13 @@
 
   @include m.phone {
     width: 90%;
+  }
 
-    .navHome {
-      
-    }
+  @include m.laptop {
+    width: 75%;
+  }
+
+  @include m.desktop {
+    width: 60%;
   }
 }

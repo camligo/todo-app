@@ -1,28 +1,62 @@
 @use "../../styles/variables.scss" as v;
+@use "../../styles/mixins.scss" as m;
 
-
-form {
+.form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
+  border: 1px solid v.$secondary;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 0.2rem;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.8rem;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+  }
 
   .formInput {
-    color: rgba(0,0,0,.87);
-    border: none;
-    border-bottom: 2px solid v.$primary;
-    letter-spacing: .002em;
-    align-self: flex-end;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px 16px 6px;
-    height: 3rem;
-    font-family: "Work Sans", sans-serif;
+    font-family: v.$fontPrimary;
+    color: rgba(0, 0, 0, 0.591);
+    margin-block: 10px;
+    padding: 0.4rem;
+    border: 1px solid lightgray;
+    height: 34px;
+    appearance: none;
+    border-radius: 8px;
+    font-size: v.$xxs;
 
     &:hover{
       border-bottom-color: v.$primary;
     }
     &:focus{
       border-color: v.$primary;
+    }
+  }
+
+  .flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+      font-size: v.$sm;
+    }
+
+    a {
+      font-family: v.$fontPrimary;
+      font-size: v.$xxs;
+      color: v.$text;
     }
   }
 }

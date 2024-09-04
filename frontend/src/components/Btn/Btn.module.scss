@@ -12,13 +12,13 @@ button.primary, button.secondary {
   }
 
   &.primary {
-    font-family: v.$font-primary;
+    font-family: v.$fontPrimary;
     background: v.$primary;
-    color: v.$secondary;
+    color: v.$textLight;
   }
 
   &.secondary {
-    font-family: v.$font-primary;
+    font-family: v.$fontPrimary;
     background: transparent;
     color: v.$primary;
 
@@ -33,6 +33,6 @@ button.primary, button.secondary {
   border-radius: 50%;
   height: 50px;
   width: 50px;
-  color: v.$secondary;
+  color: v.$textLight;
   border: none;
 }

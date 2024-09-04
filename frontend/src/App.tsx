@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import CreateTaskPage from "./pages/CreateTaskOrCategoryPage/CreateTaskOrCategoryPage"
+import CreateTaskPage from "./pages/CreateTaskPage/CreateTaskPage"
 import TodosPage from "./pages/TodosPage/TodosPage"
 import EditTaskPage from "./pages/EditTaskPage/EditTaskPage"
 import ArchivedTasksPage from "./pages/ArchivedTasksPage/ArchivedTasksPage"
 import "./App.scss"
 import NavbarContainer from "./containers/NavbarContainer/NavbarContainer"
+import CreateCategoryPage from "./pages/CreateCategory/CreateCategoryPage"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/todos/new" element={<CreateTaskPage />}/>
           <Route path="/todos/:id/edit" element={<EditTaskPage />}/>
           <Route path="/todos/archive" element={<ArchivedTasksPage />}/>
+          <Route path="/categories" element={<CreateCategoryPage />}/>
         </Routes>
       </BrowserRouter>
 

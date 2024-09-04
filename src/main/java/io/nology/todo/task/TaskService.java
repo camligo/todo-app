@@ -43,6 +43,10 @@ public class TaskService {
     return this.repo.findAll();
   }
 
+  public List<Task> findAllTasksOrderedByPriority() {
+    return this.repo.findByOrderByIsPriorityDesc();
+  }
+
   public List<Task> findAllArchivedTasks() {
     return this.repo.findByIsArchived(true);
   }

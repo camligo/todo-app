@@ -10,16 +10,6 @@ export interface CategoryResponse {
   tasks: TaskResponse[];
 }
 
-export const getAllCategories = async () => {
-  const response = await fetch(baseUrl + 'categories');
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch categories")
-  }
-
-  return await response.json() as CategoryResponse[];
-}
-
 export const createCategory = async ( data: { name: string }) => {
   const response = await fetch(baseUrl + 'categories', {
     method: 'POST',
@@ -34,6 +24,17 @@ export const createCategory = async ( data: { name: string }) => {
   }
   return await response.json() as CategoryResponse;
 }
+
+export const getAllCategories = async () => {
+  const response = await fetch(baseUrl + 'categories');
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch categories")
+  }
+
+  return await response.json() as CategoryResponse[];
+}
+
 
 export const deleteCategoryById = async (id: number) => {
   const response = await fetch(baseUrl + `categories/${id}`, {

@@ -34,10 +34,19 @@ public class TaskController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Task>> findAllTasks(
+  public ResponseEntity<List<Task>> findAllTasks (
     @RequestParam(required = false) Long category, @RequestParam(required = false) Boolean isArchived) {
     List<Task> tasks = this.taskService.findAllTasks();
     return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
+  }
+
+  @GetMapping("/priority")
+  public ResponseEntity<List<Task>> findTasksOrderedByPriority() throws NotFoundException {
+    List<Task> prioritizedTasks = this.taskService.findAllTasksOrderedByPriority();
+    if (prioritizedTasks.isEmpty()) {
+      throw new NotFoundException("No high priority tasks found");
+    }
+    return new ResponseEntity<>(prioritizedTasks, HttpStatus.OK);
   }
 
   @GetMapping("/archive")
@@ -49,14 +58,14 @@ public class TaskController {
   @GetMapping("/{id}")
   public ResponseEntity<Task> findTaskById(@PathVariable Long id) throws NotFoundException {
     Optional<Task> result = this.taskService.findTaskById(id);
-    Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find Todo-task with id " + id));
+    Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));
     return new ResponseEntity<>(foundTask, HttpStatus.OK);
   }
 
   @PatchMapping("/{id}")
   public ResponseEntity<Task> updateTaskById(@PathVariable Long id, @Valid @RequestBody UpdateTaskDTO data) throws NotFoundException {
     Optional<Task> result = this.taskService.updateTaskById(id, data);
-    Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find Todo-task with id " + id));
+    Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));
     return new ResponseEntity<>(foundTask, HttpStatus.OK);
   }
 
@@ -74,7 +83,7 @@ public class TaskController {
   public ResponseEntity<Void> deleteTaskById(@PathVariable Long id) throws NotFoundException {
     boolean deletedTask = this.taskService.deleteTaskById(id);
     if (deletedTask == false) {
-      throw new NotFoundException("Could not find Todo-task with id " + id);
+      throw new NotFoundException("Could not find task with id " + id);
     }
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

@@ -24,14 +24,16 @@ const CategorySelect = ({ value, onChange, error }: CategorySelectProps) => {
   }
 
   return (
-    <div>
+    <>
       <select
         name="category"
         id="category"
         onChange={handleSelectChange}
         className={styles.selectMenu}
       >
-        <option value=""> Select category</option>
+        <option value="" disabled selected>
+          Select
+        </option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}
@@ -39,7 +41,7 @@ const CategorySelect = ({ value, onChange, error }: CategorySelectProps) => {
         ))}
       </select>
       {error && <small>{error}</small>}
-    </div>
+    </>
   )
 }
 

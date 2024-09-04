@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long>{
   List<Task> findByIsArchived(boolean isArchived);
+  List<Task> findByOrderByIsPriorityDesc();
 }
