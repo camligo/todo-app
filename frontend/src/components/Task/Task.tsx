@@ -25,9 +25,6 @@ const Task = ({ task, onArchive }: TaskProps) => {
         <Link to={`todos/${task.id}/edit`}>
             <Btn>Edit</Btn>
         </Link>
-        <Btn variant="secondary">
-          Duplicate
-        </Btn>
       </article>
     </div>
   )

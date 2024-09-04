@@ -1,0 +1,32 @@
+@use "../../styles/mixins.scss" as m;
+@use "../../styles/variables.scss" as v;
+
+.subheadingContainer {
+  padding: 10px;
+  text-align: center;
+
+  .subheading {
+    font-family: v.$fontPrimary;
+    padding: 10px;
+    color: v.$text;
+    letter-spacing: 0.02rem;
+  }
+}
+
+img {
+  @include m.phone {
+    height: 250px;
+  }
+
+  @include m.tablet {
+    height: 300px;
+  }
+
+  @include m.laptop {
+    height: 500px;
+  }
+
+  @include m.desktop {
+    height: 500px;
+  }
+}
