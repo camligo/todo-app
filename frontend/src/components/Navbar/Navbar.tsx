@@ -4,11 +4,11 @@ import Btn from "../Btn/Btn"
 
 const Navbar = () => {
   return (
-    <nav className={styles.navTop}>
-      <Link to={"/"}>All</Link>
+    <nav className={styles.navbar}>
+      <Link to={"/"}>Home</Link>
       <Link to={"/todos/archive"}>Completed</Link>
       <Link to={"/todos/new"} className={styles.navBtn}>
-        <Btn onClick={() => console.log("nav button clicked")}>New task</Btn>
+        <Btn>New task</Btn>
       </Link>
     </nav>
   )

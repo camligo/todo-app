@@ -4,7 +4,6 @@ import { createTask } from "../../services/task-services";
 import TaskForm from "../../components/TaskForm/TaskForm";
 import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import { CategoryFormData } from "../../components/CategoryForm/schema";
-import { createCategory } from "../../services/categories-services";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import styles from "./CreateTaskOrCategoryPage.module.scss";
 
@@ -19,7 +18,7 @@ const CreateTaskPage = () => {
 
   const handleCategorySubmit = async (data: CategoryFormData) => {
     try {
-      const newCategory = await createCategory(data);
+      const newCategory = await data;
       return newCategory;
     } catch (e: any) {
       throw new Error(e.message)

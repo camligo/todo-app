@@ -4,6 +4,7 @@ import { CategoryFormData, schema } from "./schema";
 import styles from "./CategoryForm.module.scss";
 import Btn from "../Btn/Btn";
 import { useState } from "react";
+import { createCategory } from "../../services/categories-services";
 
 type FormType = 'CREATE';
 
@@ -27,10 +28,11 @@ const CategoryForm = ({ formType = 'CREATE', onSubmit }: CategoryFormProps) => {
     setSuccess(null);
 
     try {
-      const newCategory = await onSubmit(data);
+      const newCategory = await createCategory(data);
       if (newCategory) {
         setSuccess(`${newCategory.name} added!`);
         reset();
+        onSubmit(data);
       }
     } catch (e: any) {
       setError(e.message);

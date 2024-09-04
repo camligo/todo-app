@@ -27,3 +27,12 @@ button.primary, button.secondary {
     }
   }
 }
+
+.round {
+  background: v.$tertiary;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  color: v.$secondary;
+  border: none;
+}

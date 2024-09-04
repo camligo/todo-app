@@ -4,14 +4,14 @@ import TodosPage from "./pages/TodosPage/TodosPage"
 import EditTaskPage from "./pages/EditTaskPage/EditTaskPage"
 import ArchivedTasksPage from "./pages/ArchivedTasksPage/ArchivedTasksPage"
 import "./App.scss"
-import Navbar from "./components/Navbar/Navbar"
+import NavbarContainer from "./containers/NavbarContainer/NavbarContainer"
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <NavbarContainer />
         <Routes>
           <Route path='/' element={<TodosPage />} />
           <Route path="/todos/new" element={<CreateTaskPage />}/>

@@ -1,9 +1,10 @@
 @use "../../styles/variables.scss" as v;
+@use "../../styles/mixins.scss" as m;
 
-.navTop {
+.navbar {
   display: flex;
   align-items: center;
-  font-family: "Work Sans", sans-serif;
+  font-family: v.$font-primary;
   margin-block: 25px;
   border-bottom: 0.5px solid lightgray;
   padding-bottom:20px;
