@@ -118,3 +118,4 @@ export const togglePriorityTaskById = async (id: number, priority: boolean) => {
   }
   return await response.json() as TaskResponse;
 }
+

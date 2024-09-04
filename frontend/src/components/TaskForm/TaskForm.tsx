@@ -7,6 +7,7 @@ import Btn from "../Btn/Btn.tsx";
 import { FaCalendarDay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 import Modal from "../Modal/Modal.tsx";
 import { useState } from "react";
 
@@ -33,13 +34,15 @@ const TaskForm = ({
   } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [date, onChange] = useState<Value>(new Date());
+  const [date, setDate] = useState<Value>(new Date());
+
+  const locale = 'en-AU';
 
   const handleDateChange = (value: Value) => {
-    onChange(value);
-    if (!Array.isArray(value) && value !== null) {
-      setValue("dueDate", value);
-    }
+    if (Array.isArray(value) || value === null) return;
+
+    setDate(value);
+    setValue("dueDate", value);
     setIsModalOpen(false);
   }
 
@@ -106,7 +109,11 @@ const TaskForm = ({
         <div>
           {date && (
             <small className={styles.selectedDate}>
-              Due: {date.toLocaleString()}
+              Due on {date.toLocaleString(locale, {
+                year: "2-digit",
+                month: "2-digit",
+                day: "2-digit"
+              })}
             </small>
           )}
         </div>
