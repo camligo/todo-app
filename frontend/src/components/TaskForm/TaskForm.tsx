@@ -6,8 +6,14 @@ import CategorySelect from "../CategorySelect/CategorySelect.tsx";
 import Btn from "../Btn/Btn.tsx";
 import { FaCalendarDay } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Calendar from "react-calendar";
+import Modal from "../Modal/Modal.tsx";
+import { useState } from "react";
 
 type FormType = 'CREATE' | 'UPDATE';
+
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 interface TaskFormProps {
   formType?: FormType;
@@ -16,7 +22,7 @@ interface TaskFormProps {
 
 const TaskForm = ({
   formType = 'CREATE',
-  onSubmit,
+  onSubmit
 }: TaskFormProps) => {
   const {
     reset,
@@ -25,6 +31,22 @@ const TaskForm = ({
     formState: {errors, isSubmitSuccessful},
     handleSubmit,
   } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [date, onChange] = useState<Value>(new Date());
+
+  const handleDateChange = (value: Value) => {
+    onChange(value);
+    if (!Array.isArray(value) && value !== null) {
+      setValue("dueDate", value);
+    }
+    setIsModalOpen(false);
+  }
+
+  const handleOpenModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  }
 
   isSubmitSuccessful && reset();
 
@@ -55,7 +77,6 @@ const TaskForm = ({
           <CategorySelect
             value={null}
             onChange={(value) => {
-              console.log("Category Selected: ", value);
               if(value !== null) {
                 setValue('categoryId', value, { shouldValidate: true });
               }
@@ -75,10 +96,27 @@ const TaskForm = ({
               <small>Priority</small>
             </label>
           </div>
-          <div className={styles.icon}>
+          <button
+            className={styles.icon}
+            onClick={handleOpenModal}
+          >
             <FaCalendarDay />
-          </div>
+          </button>
         </div>
+        <div>
+          {date && (
+            <small className={styles.selectedDate}>
+              Due: {date.toLocaleString()}
+            </small>
+          )}
+        </div>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Calendar
+              onChange={handleDateChange}
+              value={date || new Date()}
+            />
+        </Modal>
 
         <Btn variant="primary">
           {formType === 'CREATE' ? 'Create' : 'Update'}

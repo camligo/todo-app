@@ -9,10 +9,9 @@ public class UpdateTaskDTO {
   @Length(min = 2, max = 100)
   @Pattern(regexp = ".*\\S.*", message = "Task cannot be empty")
   private String name;
-
   @Min(1)
   private Long categoryId;
-
+  
   public String getName() {
     return name;
   }

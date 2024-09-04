@@ -20,7 +20,6 @@ public class TaskService {
   private CategoryService categoryService;
 
   public Task createTask(@Valid CreateTaskDTO data) {
-    // todo: handle exception
     Category category = categoryService.findById(data.getCategoryId())
       .orElseThrow(() -> new RuntimeException("Category not found"));
 
@@ -29,6 +28,7 @@ public class TaskService {
     newTask.setName(formattedName);
     newTask.setCategory(category);
     newTask.setPriority(data.getPriority() != null ? data.getPriority() : false);
+    newTask.setDueDate(data.getDueDate());
     return this.repo.save(newTask);
   }
 

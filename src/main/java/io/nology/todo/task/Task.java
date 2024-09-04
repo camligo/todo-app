@@ -1,5 +1,7 @@
 package io.nology.todo.task;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.nology.todo.category.Category;
@@ -9,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "tasks")
@@ -28,10 +32,15 @@ public class Task extends BaseEntity {
   private Category category;
 
   @Column
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date dueDate;
+
+  @Column
   private boolean isArchived;
 
   @Column
   private boolean isPriority;
+
 
   public String getName() {
     return name;
@@ -47,6 +56,14 @@ public class Task extends BaseEntity {
 
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  public Date getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
   }
 
   public boolean isArchived() {

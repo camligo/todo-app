@@ -1,17 +1,20 @@
 package io.nology.todo.task;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 
 public class CreateTaskDTO {
   @NotBlank
-  @Length(min = 3, max = 200)
+  @Length(min = 2, max = 100)
   private String name;
-
   private Long categoryId;
-
   private Boolean priority = false;
+  @FutureOrPresent(message = "Due date cannot be in the past")
+  private Date dueDate;
 
   public String getName() {
     return name;
@@ -37,5 +40,11 @@ public class CreateTaskDTO {
     this.priority = priority;
   }
 
+  public Date getDueDate() {
+    return dueDate;
+  }
 
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
+  }
 }

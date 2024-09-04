@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services"
+import { getAllTasks, getAllTasksOrderedByPriority, TaskResponse, toggleArchiveTaskById } from "../../services/task-services"
 import Task from "../../components/Task/Task"
 import styles from "./TodosPage.module.scss"
 import PageWrapper from "../../components/PageWrapper/PageWrapper"
@@ -8,7 +8,7 @@ const TodosPage = () => {
   const [tasks, setTasks] = useState<TaskResponse[]>([])
 
   useEffect(() => {
-    getAllTasks()
+    getAllTasksOrderedByPriority()
       .then(data => setTasks(data))
       .catch((e) => console.log(e));
   }, [])
