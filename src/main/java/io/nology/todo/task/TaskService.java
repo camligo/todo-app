@@ -28,6 +28,7 @@ public class TaskService {
     String formattedName = formatName(data.getName());
     newTask.setName(formattedName);
     newTask.setCategory(category);
+    newTask.setPriority(data.getPriority() != null ? data.getPriority() : false);
     return this.repo.save(newTask);
   }
 
@@ -69,7 +70,7 @@ public class TaskService {
     if (data.getCategoryId() != null) {
       Optional<Category> category = this.categoryService.findById(data.getCategoryId());
 
-      if(category.isPresent()) {
+      if (category.isPresent()) {
         foundTask.setCategory(category.get());
       } else {
         System.out.println("Category " + data.getCategoryId() + "doesn't exist");
@@ -78,7 +79,9 @@ public class TaskService {
     if (data.getIsArchived() != null) {
       foundTask.setArchived(data.getIsArchived());
     }
-
+    if (data.getIsPriority() != null) {
+      foundTask.setPriority(data.getIsPriority());
+    }
     Task updatedTask = this.repo.save(foundTask);
     return Optional.of(updatedTask);
   }

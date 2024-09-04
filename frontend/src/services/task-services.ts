@@ -14,6 +14,7 @@ export interface TaskResponse {
   createdAt: string;
   updatedAt: string;
   archived: boolean;
+  priority: boolean;
 }
 
 export const createTask = async (data: TaskFormData) => {
@@ -38,6 +39,15 @@ export const getAllTasks = async () => {
   }
   const tasks = await response.json() as TaskResponse[];
   return tasks.filter(task => !task.archived);
+}
+
+export const getAllTasksOrderedByPriority = async () => {
+  const response = await fetch(baseUrl + 'todos/priority');
+
+  if (!response.ok) {
+    throw new Error("Failed to order tasks by priority");
+  }
+  return await response.json() as TaskResponse[];
 }
 
 export const getAllArchivedTasks = async () => {
@@ -90,7 +100,21 @@ export const toggleArchiveTaskById = async (id: number, archive: boolean) => {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to ${archive ? "archive " : "unarchive "} task`);
+    throw new Error(`Failed to ${archive ? "archive " : "move "} task`);
   }
   return true;
 };
+
+export const togglePriorityTaskById = async (id: number, priority: boolean) => {
+  const response = await fetch(baseUrl + `todos/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ priority }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to ${priority ? "set as priority" : "remove priority"} for task with id ${id}`);
+  }
+  return await response.json() as TaskResponse;
+}

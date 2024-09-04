@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 public class UpdateTaskDTO {
-  @Length(min = 3, max = 200)
-  @Pattern(regexp = ".*\\S.*", message = "Todo-task can't be empty")
+  @Length(min = 2, max = 100)
+  @Pattern(regexp = ".*\\S.*", message = "Task cannot be empty")
   private String name;
 
   @Min(1)
@@ -37,5 +37,15 @@ public class UpdateTaskDTO {
 
   public void setIsArchived(Boolean isArchived) {
     this.isArchived = isArchived;
+  }
+
+  private Boolean isPriority;
+
+  public Boolean getIsPriority() {
+    return isPriority;
+  }
+
+  public void setIsPriority(Boolean isPriority) {
+    this.isPriority = isPriority;
   }
 }

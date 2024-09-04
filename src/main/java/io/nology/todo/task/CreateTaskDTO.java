@@ -11,11 +11,31 @@ public class CreateTaskDTO {
 
   private Long categoryId;
 
+  private Boolean priority = false;
+
   public String getName() {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public Long getCategoryId() {
     return categoryId;
   }
+
+  public void setCategoryId(Long categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  public Boolean getPriority() {
+    return priority;
+  }
+
+  public void setPriority(Boolean priority) {
+    this.priority = priority;
+  }
+
+
 }

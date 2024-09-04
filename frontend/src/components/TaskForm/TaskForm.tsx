@@ -35,7 +35,8 @@ const TaskForm = ({
           <label htmlFor="name">Task</label>
           <input
             id="name"
-            type="text" {...register('name')}
+            type="text"
+            {...register('name')}
             placeholder="Enter task"
             className={styles.formInput}
           />
@@ -52,7 +53,7 @@ const TaskForm = ({
             <Link to={"/categories"}>Create new category</Link>
           </div>
           <CategorySelect
-            value={null} // intial value
+            value={null}
             onChange={(value) => {
               console.log("Category Selected: ", value);
               if(value !== null) {
@@ -65,7 +66,11 @@ const TaskForm = ({
 
         <div className={styles.flexRow}>
           <div className={styles.checkbox}>
-            <input type="checkbox" id="priority" name="priority"/>
+            <input
+              type="checkbox"
+              id="priority"
+              {...register('priority')}
+            />
             <label htmlFor="priority">
               <small>Priority</small>
             </label>
@@ -75,7 +80,7 @@ const TaskForm = ({
           </div>
         </div>
 
-        <Btn variant="primary" onClick={() => console.log("button clicked")}>
+        <Btn variant="primary">
           {formType === 'CREATE' ? 'Create' : 'Update'}
         </Btn>
       </form>
