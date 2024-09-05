@@ -1,0 +1,15 @@
+@use "../../styles/variables.scss" as v;
+
+.tasksContainer {
+  width: 100%;
+}
+
+.subHeadingContainer {
+  display: flex;
+  width: 100%;
+
+  .subHeading {
+    align-items: flex-start;
+    font-family: v.$fontPrimary;
+  }
+}

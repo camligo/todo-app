@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
 
   .taskContainer {
     display: flex;
@@ -12,7 +11,7 @@
     justify-content: space-between;
     flex-grow: 1;
     gap: 1rem;
-    border: 1px solid v.$primary;
+    border: 1px solid v.$secondary;
     padding: 10px;
     margin: 10px;
     border-radius: 8px;
@@ -21,6 +20,7 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      font-family: v.$fontPrimary;
     }
 
     a {

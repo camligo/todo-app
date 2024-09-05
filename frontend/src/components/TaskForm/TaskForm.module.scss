@@ -49,6 +49,23 @@
   }
 }
 
+.linkDelete {
+  text-align: center;
+  padding: 1.4rem;
+  color: #FD5858;
+  font-family: v.$fontPrimary;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+
+  button {
+    flex-grow: 1;
+  }
+}
+
 .selectedDate {
   display: flex;
   justify-content: flex-end;

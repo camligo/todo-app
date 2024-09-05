@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { deleteTaskById, getAllArchivedTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services";
 import ArchivedTask from "../../components/ArchivedTask/ArchivedTask";
-import styles from "./ArchivedTasksPage.module.scss"
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import styles from "./CompletedTasks.module.scss";
 
-const ArchivedTasksPage = () => {
-  const [tasks, setTasks] = useState<TaskResponse[]>([])
+interface CompletedTasksProps {
+  archivedTasks: TaskResponse[];
+  setArchivedTasks: (tasks: TaskResponse[]) => void;
+}
 
+const CompletedTasks = ({ archivedTasks, setArchivedTasks }: CompletedTasksProps ) => {
   useEffect(() => {
     getAllArchivedTasks()
-      .then(data => setTasks(data))
+      .then(data => setArchivedTasks(data))
       .catch((e) => console.log(e));
   }, [])
 
@@ -23,8 +25,8 @@ const ArchivedTasksPage = () => {
       return false;
     });
     if(isDeleted) {
-      const updatedTasks = tasks.filter(task => task.id !== id);
-      setTasks(updatedTasks);
+      const updatedTasks = archivedTasks.filter(task => task.id !== id);
+      setArchivedTasks(updatedTasks);
     }
   }
 
@@ -37,20 +39,24 @@ const ArchivedTasksPage = () => {
       console.log(e);
       return false;
     });
-    if(isUnArchived) {
-      const updatedTasks = tasks.filter(task => task.id !== id);
-      setTasks(updatedTasks);
+    if (isUnArchived) {
+      const updatedArchivedTasks = archivedTasks.filter(task => task.id !== id);
+      setArchivedTasks(updatedArchivedTasks);
     }
   }
 
   return (
-    <PageWrapper>
-      <h2>Completed tasks</h2>
-      {tasks.map((task) => (
-        <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
-      ))}
-    </PageWrapper>
+    <>
+    <div className={styles.subHeadingContainer}>
+      <h4 className={styles.subHeading}>Completed tasks</h4>
+    </div>
+      <div className={styles.tasksContainer}>
+        {archivedTasks.map((task) => (
+          <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
+        ))}
+      </div>
+    </>
   )
 }
 
-export default ArchivedTasksPage
+export default CompletedTasks

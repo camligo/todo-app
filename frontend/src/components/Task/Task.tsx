@@ -18,7 +18,7 @@ const Task = ({ task, onArchive }: TaskProps) => {
         </button>
 
         <div className={styles.taskDetails}>
-          <h4>{task.name}</h4>
+          <p>{task.name}</p>
           <p className={styles.categoryTag}>{task.category.name}</p>
         </div>
 

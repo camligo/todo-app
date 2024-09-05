@@ -5,7 +5,7 @@ import styles from "./TaskForm.module.scss"
 import CategorySelect from "../CategorySelect/CategorySelect.tsx";
 import Btn from "../Btn/Btn.tsx";
 import { FaCalendarDay } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import Modal from "../Modal/Modal.tsx";
@@ -23,7 +23,9 @@ interface TaskFormProps {
   defaultValues?: any;
 }
 
-const TaskForm = ({ formType = 'CREATE', onSubmit, defaultValues={name: "something"} }: TaskFormProps) => {
+const TaskForm = ({ formType = 'CREATE', onSubmit, defaultValues }: TaskFormProps) => {
+  const navigate = useNavigate();
+
   const {
     reset,
     register,
@@ -48,6 +50,10 @@ const TaskForm = ({ formType = 'CREATE', onSubmit, defaultValues={name: "somethi
   const handleOpenModal = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsModalOpen(true);
+  }
+
+  const handleCancel = () => {
+    navigate('/todos/new')
   }
 
   isSubmitSuccessful && reset();
@@ -124,9 +130,28 @@ const TaskForm = ({ formType = 'CREATE', onSubmit, defaultValues={name: "somethi
             />
         </Modal>
 
-        <Btn variant="primary">
-          {formType === 'CREATE' ? 'Create' : 'Update'}
-        </Btn>
+        {/* {formType === 'UPDATE' && (
+          <Link to={`/todos/${task.id}`} className={styles.linkDelete}>
+            Delete task?
+          </Link>
+        )} */}
+
+        {formType === 'UPDATE' && (
+          <div className={styles.btnContainer}>
+            <Btn variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Btn>
+            <Btn variant="primary">
+              Update
+            </Btn>
+          </div>
+        )}
+
+        {formType === 'CREATE' && (
+          <Btn variant="primary">
+            Add
+          </Btn>
+        )}
       </FormStyle>
     </>
   )
