@@ -1,0 +1,11 @@
+@use "../../styles/variables.scss" as v;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  border: 1px solid v.$secondary;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 0.2rem;
+}

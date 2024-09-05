@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { TaskFormData } from "../../components/TaskForm/schema";
 import { createTask } from "../../services/task-services";
 import TaskForm from "../../components/TaskForm/TaskForm";
-import { CategoryFormData } from "../../components/CategoryForm/schema";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import styles from "./CreateTaskPage.module.scss";
 import Title from "../../components/Title/Title";
@@ -16,23 +15,11 @@ const CreateTaskPage = () => {
     .catch((e) => console.log(e)); // todo - display error to user
   };
 
-  // const handleCategorySubmit = async (data: CategoryFormData) => {
-  //   try {
-  //     const newCategory = await data;
-  //     return newCategory;
-  //   } catch (e: any) {
-  //     throw new Error(e.message)
-  //   }
-  // };
-
   return (
     <PageWrapper>
-      <Title>Add new task</Title>
+      <Title>New task</Title>
       <div className={styles.formContainer}>
-          <TaskForm onSubmit={handleTaskSubmit} formType='CREATE' />
-        {/* <div>
-          <CategoryForm onSubmit={handleCategorySubmit} formType='CREATE' />
-        </div> */}
+        <TaskForm onSubmit={handleTaskSubmit} formType='CREATE' />
       </div>
     </PageWrapper>
   )

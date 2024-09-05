@@ -5,6 +5,8 @@ import styles from "./CategoryForm.module.scss";
 import Btn from "../Btn/Btn";
 import { useState } from "react";
 import { createCategory } from "../../services/categories-services";
+import { useNavigate } from "react-router-dom";
+import FormStyle from "../FormStyle/FormStyle";
 
 type FormType = 'CREATE';
 
@@ -13,6 +15,8 @@ interface CategoryFormProps {
   onSubmit: (data: CategoryFormData) => unknown;
 }
 const CategoryForm = ({ formType = 'CREATE', onSubmit }: CategoryFormProps) => {
+  const navigate = useNavigate();
+
   const {
     reset,
     register,
@@ -30,30 +34,41 @@ const CategoryForm = ({ formType = 'CREATE', onSubmit }: CategoryFormProps) => {
     try {
       const newCategory = await createCategory(data);
       if (newCategory) {
-        setSuccess(`${newCategory.name} added!`);
         reset();
         onSubmit(data);
+        navigate('/todos/new');
       }
     } catch (e: any) {
       setError(e.message);
     }
   }
 
+  const handleCancel = () => {
+    navigate('/todos/new')
+  }
+
   return (
     <>
-      <h2>Create new category</h2>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <FormStyle onSubmit={handleSubmit(handleFormSubmit)}>
+        <label htmlFor="name">New category</label>
         <input
+          id="name"
           type="text"
-          placeholder="Enter a name"
+          placeholder="Enter name"
           {...register('name')}
           className={styles.formInput}
         />
         {errors?.name && <small className={styles.errorText}>{errors.name.message}</small>}
         {error && <small className={styles.errorText}>{error}</small>}
-        {success && <small className={styles.successText}>{success}</small>}
-        <Btn variant="secondary">Add</Btn>
-      </form>
+        <div className={styles.btnContainer}>
+          <Btn variant="secondary" onClick={handleCancel}>
+            Cancel
+          </Btn>
+          <Btn>
+            Add
+          </Btn>
+        </div>
+      </FormStyle>
     </>
   )
 }

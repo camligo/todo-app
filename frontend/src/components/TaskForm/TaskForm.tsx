@@ -10,6 +10,7 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import Modal from "../Modal/Modal.tsx";
 import { useState } from "react";
+import FormStyle from "../FormStyle/FormStyle.tsx";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -55,7 +56,7 @@ const TaskForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <FormStyle onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.field}>
           <label htmlFor="name">Task</label>
           <input
@@ -128,7 +129,7 @@ const TaskForm = ({
         <Btn variant="primary">
           {formType === 'CREATE' ? 'Create' : 'Update'}
         </Btn>
-      </form>
+      </FormStyle>
     </>
   )
 }

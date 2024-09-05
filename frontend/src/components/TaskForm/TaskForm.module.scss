@@ -2,74 +2,58 @@
 @use "../../styles/mixins.scss" as m;
 @import 'react-calendar/dist/Calendar.css';
 
-.form {
+.field {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  border: 1px solid v.$secondary;
+  margin-bottom: 0.8rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.formInput {
+  font-family: v.$fontPrimary;
+  color: rgba(0, 0, 0, 0.591);
+  margin-block: 10px;
+  padding: 0.4rem;
+  border: 1px solid lightgray;
+  height: 34px;
+  appearance: none;
   border-radius: 8px;
-  padding: 16px;
-  gap: 0.2rem;
+  font-size: v.$xxs;
+  outline: none;
+}
 
-  .field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.8rem;
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon {
+    font-size: v.$sm;
+    background: none;
+    border: none;
+    color: rgb(97, 97, 97);
   }
 
-  .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .formInput {
+  a {
     font-family: v.$fontPrimary;
-    color: rgba(0, 0, 0, 0.591);
-    margin-block: 10px;
-    padding: 0.4rem;
-    border: 1px solid lightgray;
-    height: 34px;
-    appearance: none;
-    border-radius: 8px;
     font-size: v.$xxs;
-
-    &:hover{
-      border-bottom-color: v.$primary;
-    }
-    &:focus{
-      border-color: v.$primary;
-    }
+    color: v.$text;
   }
+}
 
-  .flexRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    .icon {
-      font-size: v.$sm;
-      background: none;
-      border: none;
-      color: rgb(97, 97, 97);
-    }
-
-    a {
-      font-family: v.$fontPrimary;
-      font-size: v.$xxs;
-      color: v.$text;
-    }
-  }
-
-  .selectedDate {
-    display: flex;
-    justify-content: flex-end;
-    font-family: v.$fontPrimary;
-    padding-block: 0.2rem;
-  }
+.selectedDate {
+  display: flex;
+  justify-content: flex-end;
+  font-family: v.$fontPrimary;
+  padding-block: 0.2rem;
 }
 
 .errorText {
