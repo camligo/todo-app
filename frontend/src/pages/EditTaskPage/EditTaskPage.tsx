@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { TaskFormData } from "../../components/TaskForm/schema";
 import TaskForm from "../../components/TaskForm/TaskForm";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import Title from "../../components/Title/Title";
 
 type Status = 'IDLE' | 'LOADING' | 'SUCCESS' | 'FAILURE';
 
@@ -35,7 +36,7 @@ const EditTaskPage = () => {
   };
   return (
     <PageWrapper>
-      <h1>Edit Task</h1>
+      <Title>Edit task</Title>
       {status === 'LOADING' && <p>Loading...</p>}
       {status === 'FAILURE' && (
         <p>{error?.message}</p>
@@ -44,7 +45,7 @@ const EditTaskPage = () => {
         <TaskForm
           onSubmit={formSubmit}
           formType='UPDATE'
-          // initialData={task}
+          defaultValues={{name: task.name}}
         />
       )}
     </PageWrapper>

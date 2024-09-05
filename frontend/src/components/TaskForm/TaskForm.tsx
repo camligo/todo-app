@@ -20,19 +20,17 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 interface TaskFormProps {
   formType?: FormType;
   onSubmit: (data: TaskFormData) => unknown;
+  defaultValues?: any;
 }
 
-const TaskForm = ({
-  formType = 'CREATE',
-  onSubmit
-}: TaskFormProps) => {
+const TaskForm = ({ formType = 'CREATE', onSubmit, defaultValues={name: "something"} }: TaskFormProps) => {
   const {
     reset,
     register,
     setValue,
     formState: {errors, isSubmitSuccessful},
     handleSubmit,
-  } = useForm<TaskFormData>({ resolver: zodResolver(schema) });
+  } = useForm<TaskFormData>({ resolver: zodResolver(schema), defaultValues });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [date, setDate] = useState<Value>(new Date());
