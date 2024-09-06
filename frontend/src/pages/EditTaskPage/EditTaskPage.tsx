@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getTaskById, TaskResponse, updateTaskById } from "../../services/task-services";
 import { useNavigate, useParams } from "react-router-dom";
 import { TaskFormData } from "../../components/TaskForm/schema";
-import TaskForm from "../../components/TaskForm/TaskForm";
+import TaskForm, { getDate } from "../../components/TaskForm/TaskForm";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import Title from "../../components/Title/Title";
 
@@ -46,7 +46,7 @@ const EditTaskPage = () => {
         <TaskForm
           onSubmit={formSubmit}
           formType='UPDATE'
-          defaultValues={{name: task.name}}
+          defaultValues={{name: task.name, categoryId: task.category.id, dueDate: getDate(task.dueDate)}}
         />
       )}
     </PageWrapper>

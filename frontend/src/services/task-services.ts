@@ -15,6 +15,7 @@ export interface TaskResponse {
   updatedAt: string;
   archived: boolean;
   priority: boolean;
+  dueDate: Date;
 }
 
 export const createTask = async (data: TaskFormData) => {
@@ -118,4 +119,3 @@ export const togglePriorityTaskById = async (id: number, priority: boolean) => {
   }
   return await response.json() as TaskResponse;
 }
-
