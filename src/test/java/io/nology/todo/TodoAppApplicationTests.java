@@ -1,4 +1,4 @@
-package io.nology.todo_app;
+package io.nology.todo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

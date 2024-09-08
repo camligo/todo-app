@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import io.nology.todo.common.exceptions.DuplicateCategoryException;
 import io.nology.todo.common.exceptions.NotFoundException;
+import io.nology.todo.common.exceptions.ServiceValidationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -16,8 +16,8 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
   }
 
-  @ExceptionHandler(DuplicateCategoryException.class)
-  public ResponseEntity<String> handleDuplicateCategoryException(DuplicateCategoryException exception) {
-    return new ResponseEntity<String>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+  @ExceptionHandler(ServiceValidationException.class)
+  public ResponseEntity<ValidationErrors> handleServiceValidationException(ServiceValidationException ex) {
+    return new ResponseEntity<>(ex.getErrors(), HttpStatus.BAD_REQUEST);
   }
 }
