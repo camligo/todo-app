@@ -8,7 +8,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 
 public class CreateTaskDTO {
-  @NotBlank
+  @NotBlank(message = "Task name cannot be empty")
   @Length(min = 2, max = 100)
   private String name;
   private Long categoryId;

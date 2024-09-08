@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.nology.todo.common.exceptions.NotFoundException;
+import io.nology.todo.common.exceptions.ServiceValidationException;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class TaskController {
   private TaskService taskService;
 
   @PostMapping
-  public ResponseEntity<Task> createTask(@Valid @RequestBody CreateTaskDTO data) {
+  public ResponseEntity<Task> createTask(@Valid @RequestBody CreateTaskDTO data) throws NotFoundException {
     Task createdTask = this.taskService.createTask(data);
     return new ResponseEntity<Task>(createdTask, HttpStatus.CREATED);
   }
@@ -70,11 +72,11 @@ public class TaskController {
   }
 
   @PatchMapping("/{id}/archive")
-  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id, @RequestParam boolean archive) throws NotFoundException {
-    UpdateTaskDTO archiveDTO = new UpdateTaskDTO();
-    archiveDTO.setIsArchived(archive);
+  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id, @RequestBody Boolean archiveStatus) throws NotFoundException {
+    UpdateTaskDTO archiveTask = new UpdateTaskDTO();
+    archiveTask.setIsArchived(archiveStatus);
 
-    Optional<Task> result = this.taskService.updateTaskById(id, archiveDTO);
+    Optional<Task> result = this.taskService.updateTaskById(id, archiveTask);
     Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));
     return new ResponseEntity<>(foundTask, HttpStatus.OK);
   }

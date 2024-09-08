@@ -1,5 +1,7 @@
 package io.nology.todo.task;
 
+import java.util.Map;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.Min;
@@ -11,7 +13,7 @@ public class UpdateTaskDTO {
   private String name;
   @Min(1)
   private Long categoryId;
-  
+
   public String getName() {
     return name;
   }
@@ -34,8 +36,8 @@ public class UpdateTaskDTO {
       return isArchived;
   }
 
-  public void setIsArchived(Boolean isArchived) {
-    this.isArchived = isArchived;
+  public void setIsArchived(Boolean archiveStatus) {
+    this.isArchived = archiveStatus;
   }
 
   private Boolean isPriority;

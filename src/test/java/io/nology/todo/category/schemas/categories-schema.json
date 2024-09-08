@@ -15,15 +15,6 @@
       },
       "updatedAt": {
         "type": "string"
-      },
-      "dueDate": {
-        "type": "string"
-      },
-      "priority": {
-        "type": "boolean"
-      },
-      "archived": {
-        "type": "boolean"
       }
     },
     "required": ["id", "name", "createdAt", "updatedAt"]

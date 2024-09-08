@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import io.nology.todo.category.Category;
 import io.nology.todo.category.CategoryService;
+import io.nology.todo.common.ValidationErrors;
+import io.nology.todo.common.exceptions.NotFoundException;
+import io.nology.todo.common.exceptions.ServiceValidationException;
 import jakarta.validation.Valid;
 
 @Service
@@ -19,16 +22,18 @@ public class TaskService {
   @Autowired
   private CategoryService categoryService;
 
-  public Task createTask(@Valid CreateTaskDTO data) {
+  public Task createTask(@Valid CreateTaskDTO data) throws NotFoundException {
     Category category = categoryService.findById(data.getCategoryId())
-      .orElseThrow(() -> new RuntimeException("Category not found"));
+      .orElseThrow(() -> new NotFoundException("Category not found"));
 
     Task newTask = new Task();
     String formattedName = formatName(data.getName());
+
     newTask.setName(formattedName);
     newTask.setCategory(category);
     newTask.setPriority(data.getPriority() != null ? data.getPriority() : false);
     newTask.setDueDate(data.getDueDate());
+
     return this.repo.save(newTask);
   }
 
@@ -41,7 +46,7 @@ public class TaskService {
   }
 
   public List<Task> findAllTasks() {
-    return this.repo.findAll();
+    return this.repo.findByIsArchivedFalseOrderByIsPriorityDesc();
   }
 
   public List<Task> findAllTasksOrderedByPriority() {
