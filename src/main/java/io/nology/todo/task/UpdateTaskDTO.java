@@ -1,6 +1,6 @@
 package io.nology.todo.task;
 
-import java.util.Map;
+import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -13,6 +13,9 @@ public class UpdateTaskDTO {
   private String name;
   @Min(1)
   private Long categoryId;
+  private Boolean isArchived;
+  private Boolean isPriority;
+  private Date dueDate;
 
   public String getName() {
     return name;
@@ -30,7 +33,6 @@ public class UpdateTaskDTO {
     this.categoryId = categoryId;
   }
 
-  private Boolean isArchived;
 
   public Boolean getIsArchived() {
       return isArchived;
@@ -40,8 +42,6 @@ public class UpdateTaskDTO {
     this.isArchived = archiveStatus;
   }
 
-  private Boolean isPriority;
-
   public Boolean getIsPriority() {
     return isPriority;
   }
@@ -49,4 +49,14 @@ public class UpdateTaskDTO {
   public void setIsPriority(Boolean isPriority) {
     this.isPriority = isPriority;
   }
+
+  public Date getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  
 }

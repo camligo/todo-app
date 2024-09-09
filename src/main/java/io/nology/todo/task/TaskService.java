@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import io.nology.todo.category.Category;
 import io.nology.todo.category.CategoryService;
-import io.nology.todo.common.ValidationErrors;
 import io.nology.todo.common.exceptions.NotFoundException;
-import io.nology.todo.common.exceptions.ServiceValidationException;
 import jakarta.validation.Valid;
 
 @Service

@@ -6,12 +6,12 @@
   align-items: center;
   font-family: v.$fontPrimary;
   margin-block: 25px;
-  border-bottom: 0.5px solid v.$textLight;
+  border-bottom: 0.5px solid v.$secondary;
   padding-bottom:20px;
 
   a {
     text-decoration: none;
-    color: v.$textLight;
+    color: v.$text;
     padding-inline: 1.5rem;
   }
 

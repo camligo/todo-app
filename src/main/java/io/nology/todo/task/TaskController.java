@@ -9,7 +9,6 @@ import io.nology.todo.common.exceptions.ServiceValidationException;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,9 +71,9 @@ public class TaskController {
   }
 
   @PatchMapping("/{id}/archive")
-  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id, @RequestBody Boolean archiveStatus) throws NotFoundException {
+  public ResponseEntity<Task> archiveTaskById(@PathVariable Long id, @RequestParam Boolean isArchived) throws NotFoundException {
     UpdateTaskDTO archiveTask = new UpdateTaskDTO();
-    archiveTask.setIsArchived(archiveStatus);
+    archiveTask.setIsArchived(isArchived);
 
     Optional<Task> result = this.taskService.updateTaskById(id, archiveTask);
     Task foundTask = result.orElseThrow(() -> new NotFoundException("Could not find task with id " + id));

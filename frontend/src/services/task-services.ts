@@ -96,9 +96,16 @@ export const deleteTaskById = async (id: number) => {
 }
 
 export const toggleArchiveTaskById = async (id: number, archive: boolean) => {
-  const response = await fetch(baseUrl + `todos/${id}/archive?archive=${archive}`, {
+  const response = await fetch(baseUrl + `todos/${id}/archive?isArchived=${archive}`, {
     method: 'PATCH',
+    body: JSON.stringify({ archive }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
   });
+
+  const responseData = await response.json();
+  console.log("Response:", response.status, responseData);
 
   if (!response.ok) {
     throw new Error(`Failed to ${archive ? "archive " : "move "} task`);
