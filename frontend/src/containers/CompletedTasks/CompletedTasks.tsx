@@ -15,21 +15,6 @@ const CompletedTasks = ({ archivedTasks, setArchivedTasks }: CompletedTasksProps
       .catch((e) => console.log(e));
   }, [])
 
-  const deleteTask = async (id: number) => {
-    const confirmed = confirm("Are you sure you want to delete this task?");
-    if(!confirmed) {
-      return;
-    }
-    const isDeleted = await deleteTaskById(id).catch((e) => {
-      console.log(e);
-      return false;
-    });
-    if(isDeleted) {
-      const updatedTasks = archivedTasks.filter(task => task.id !== id);
-      setArchivedTasks(updatedTasks);
-    }
-  }
-
   const unArchiveTask = async (id: number) => {
     const confirmed = confirm("Move this task to Todo-list?");
     if(!confirmed) {
@@ -52,7 +37,7 @@ const CompletedTasks = ({ archivedTasks, setArchivedTasks }: CompletedTasksProps
     </div>
       <div className={styles.tasksContainer}>
         {archivedTasks.map((task) => (
-          <ArchivedTask task={task} key={task.id} onDelete={deleteTask} onUnArchive={unArchiveTask}/>
+          <ArchivedTask task={task} key={task.id} onUnArchive={unArchiveTask}/>
         ))}
       </div>
     </>

@@ -1,7 +1,13 @@
 @use "../../styles/variables.scss" as v;
+@use "../../styles/mixins.scss" as m;
 
 .tasksContainer {
   width: 100%;
+  margin-bottom: 8rem;
+
+  @include m.phone {
+    margin-bottom: 5rem;
+  }
 }
 
 .subHeadingContainer {

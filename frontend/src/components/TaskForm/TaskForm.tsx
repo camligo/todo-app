@@ -4,8 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "./TaskForm.module.scss"
 import CategorySelect from "../CategorySelect/CategorySelect.tsx";
 import Btn from "../Btn/Btn.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormStyle from "../FormStyle/FormStyle.tsx";
+import { deleteTaskById } from "../../services/task-services.ts";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -13,6 +14,7 @@ interface TaskFormProps {
   formType?: FormType;
   onSubmit: (data: TaskFormData) => unknown;
   defaultValues?: any;
+  id: number;
 }
 
 export const getDate = (date?: Date): string => {
@@ -30,7 +32,23 @@ const TaskForm = ({
   formType = "CREATE",
   onSubmit,
   defaultValues = { name: "", categoryId: "", dueDate: getDate() },
+  id,
 }: TaskFormProps) => {
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm("Are you sure you want to delete this task?");
+    if (!confirmed) {
+      return;
+    }
+    try {
+      await deleteTaskById(id);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const methods = useForm<TaskFormData>({
     resolver: zodResolver(schema),
     defaultValues,
@@ -103,6 +121,9 @@ const TaskForm = ({
               )}
             </div>
           </div>
+          {formType === 'UPDATE' && (
+            <Link to="#" onClick={handleDelete}>Delete</Link>
+          )}
 
           <Btn variant="primary">
             {formType === "CREATE" ? "Create" : "Update"}

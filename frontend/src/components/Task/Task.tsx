@@ -18,13 +18,12 @@ const Task = ({ task, onArchive }: TaskProps) => {
         </button>
 
         <div className={styles.taskDetails}>
-          <p>{task.name}</p>
-          <p className={styles.categoryTag}>{task.category.name}</p>
+          <Link to={`todos/${task.id}/edit`}>
+            <p className={styles.taskTitle}>{task.name}</p>
+          </Link>
+          <small>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : ""}</small>
         </div>
-
-        <Link to={`todos/${task.id}/edit`}>
-            <Btn>Edit</Btn>
-        </Link>
+        <small className={styles.categoryTag}>{task.category.name}</small>
       </article>
     </div>
   )

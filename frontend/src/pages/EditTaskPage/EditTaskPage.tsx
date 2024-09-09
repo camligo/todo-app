@@ -47,6 +47,7 @@ const EditTaskPage = () => {
           onSubmit={formSubmit}
           formType='UPDATE'
           defaultValues={{name: task.name, categoryId: task.category.id, dueDate: getDate(task.dueDate)}}
+          id={idNumber}
         />
       )}
     </PageWrapper>

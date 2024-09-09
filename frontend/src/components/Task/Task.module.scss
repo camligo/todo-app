@@ -13,18 +13,22 @@
     gap: 1rem;
     border: 1px solid v.$secondary;
     padding: 10px;
-    margin: 10px;
+    margin: 6px;
     border-radius: 8px;
 
     .taskDetails {
-      display: flex;
-      flex-direction: column;
       flex-grow: 1;
       font-family: v.$fontPrimary;
-    }
 
-    a {
-      text-decoration: none;
+      .taskTitle {
+        color: v.$text;
+        font-weight: bold;
+      }
+
+      a {
+        text-decoration: none;
+        line-height: 0;
+      }
     }
   }
 
@@ -43,6 +47,9 @@
 
   .categoryTag {
     font-family: "Work Sans", sans-serif;
-    color: blue;
+    color: v.$textLight;
+    background: v.$tertiary;
+    padding: 0.4rem;
+    border-radius: 8px;
   }
 }
