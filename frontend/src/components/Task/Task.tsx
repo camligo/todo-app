@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { TaskResponse } from "../../services/task-services"
 import styles from "./Task.module.scss"
-import Btn from "../Btn/Btn";
 
 interface TaskProps {
   task: TaskResponse;

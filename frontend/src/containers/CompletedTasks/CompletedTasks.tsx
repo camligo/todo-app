@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { deleteTaskById, getAllArchivedTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services";
-import ArchivedTask from "../../components/ArchivedTask/ArchivedTask";
+import { useEffect } from "react";
+import { getAllArchivedTasks, TaskResponse, toggleArchiveTaskById } from "../../services/task-services";
+import CompletedTask from "../../components/CompletedTask/CompletedTask";
 import styles from "./CompletedTasks.module.scss";
 
 interface CompletedTasksProps {
@@ -32,12 +32,14 @@ const CompletedTasks = ({ archivedTasks, setArchivedTasks }: CompletedTasksProps
 
   return (
     <>
-    <div className={styles.subHeadingContainer}>
-      <h4 className={styles.subHeading}>Completed tasks</h4>
-    </div>
+      <div className={styles.subHeadingContainer}>
+        <h4 className={styles.subHeading}>
+          Completed tasks
+        </h4>
+      </div>
       <div className={styles.tasksContainer}>
         {archivedTasks.map((task) => (
-          <ArchivedTask task={task} key={task.id} onUnArchive={unArchiveTask}/>
+          <CompletedTask task={task} key={task.id} onUnArchive={unArchiveTask}/>
         ))}
       </div>
     </>

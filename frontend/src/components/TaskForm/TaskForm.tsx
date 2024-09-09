@@ -7,6 +7,8 @@ import Btn from "../Btn/Btn.tsx";
 import { Link, useNavigate } from "react-router-dom";
 import FormStyle from "../FormStyle/FormStyle.tsx";
 import { deleteTaskById } from "../../services/task-services.ts";
+import { useState } from "react";
+import Modal from "../Modal/Modal.tsx";
 
 type FormType = 'CREATE' | 'UPDATE';
 
@@ -35,18 +37,27 @@ const TaskForm = ({
   id,
 }: TaskFormProps) => {
   const navigate = useNavigate();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleDelete = async () => {
-    const confirmed = window.confirm("Are you sure you want to delete this task?");
-    if (!confirmed) {
-      return;
-    }
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
     try {
       await deleteTaskById(id);
       navigate('/');
+
     } catch (error) {
       console.error(error);
+
+    } finally {
+      setShowDeleteModal(false);
     }
+  }
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
   };
 
   const methods = useForm<TaskFormData>({
@@ -122,7 +133,9 @@ const TaskForm = ({
             </div>
           </div>
           {formType === 'UPDATE' && (
-            <Link to="#" onClick={handleDelete}>Delete</Link>
+            <Link to="#" onClick={handleDelete} className={styles.linkDelete}>
+              Delete task
+            </Link>
           )}
 
           <Btn variant="primary">
@@ -130,6 +143,15 @@ const TaskForm = ({
           </Btn>
         </FormStyle>
       </FormProvider>
+      {showDeleteModal && (
+        <Modal isOpen={showDeleteModal} onClose={handleCancelDelete}>
+          <h4 className={styles.textWarning}>Are you sure you want to delete this task?</h4>
+          <div className={styles.btnContainer}>
+            <Btn onClick={handleCancelDelete} variant="secondary">Cancel</Btn>
+            <Btn onClick={handleConfirmDelete}>Delete</Btn>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };

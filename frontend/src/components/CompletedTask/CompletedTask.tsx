@@ -1,12 +1,12 @@
 import { TaskResponse } from "../../services/task-services"
-import styles from "./ArchivedTask.module.scss"
+import styles from "./CompletedTask.module.scss"
 
 interface TaskProps {
   task: TaskResponse;
   onUnArchive: (id: number) => Promise<unknown>;
 }
 
-const ArchivedTask = ({ task, onUnArchive }: TaskProps) => {
+const CompletedTask = ({ task, onUnArchive }: TaskProps) => {
   return (
     <div className={styles.taskWrapper}>
       <article className={styles.taskContainer}>
@@ -22,4 +22,4 @@ const ArchivedTask = ({ task, onUnArchive }: TaskProps) => {
   )
 }
 
-export default ArchivedTask
+export default CompletedTask
