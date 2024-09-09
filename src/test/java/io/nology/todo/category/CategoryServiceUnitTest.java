@@ -19,7 +19,6 @@ import org.mockito.Spy;
 import io.nology.todo.common.exceptions.ServiceValidationException;
 
 public class CategoryServiceUnitTest {
-  // every time we have a if statement, I want to test that
   @Mock
   private CategoryRepository repo;
 
